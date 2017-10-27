@@ -1,0 +1,26 @@
+{
+  "name": "shopping-list-full-stack-capstone",
+  "version": "1.0.0",
+  "description": "Menu and shopping list app. ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/terrylthompsonintx/shopping-list-full-stack-capstone.git"
+  },
+  "keywords": [
+    "Shopping",
+    "list"
+  ],
+  "author": "Terry Thompson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/terrylthompsonintx/shopping-list-full-stack-capstone/issues"
+  },
+  "homepage": "https://github.com/terrylthompsonintx/shopping-list-full-stack-capstone#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
