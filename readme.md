@@ -68,9 +68,6 @@ Find a working prototype with Node at https://shopping-list-node-capstone.heroku
 
 * The app is responsive and optimized for both desktop and mobile viewing and use
 
-#### Security
-
-* User passwords are encrypted using bcrypt.js.
 
 ## API Documentation
 API endpoints for the back end include:

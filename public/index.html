@@ -2,10 +2,75 @@
 <html>
 
 <head>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="rows.css" />
+
 </head>
 
 <body>
-    <p> Hello World.</p>
+    <header>
+        Cooking is cool.
+    </header>
+    <main id='intro' class='col-12'>
+        <p>This application allows you to:</p>
+        <ul>
+            <li>Search for recipes. </li>
+            <li>Select recipes and create a menu for a week.</li>
+            <li>Create a shopping list for that menu.</li>
+            <li>View a page with links to your selected recipes.</li>
+        </ul>
+        <input type="button" value='Continue' id='continueButton'>
+
+    </main>
+    <main id='search' class='col-12'>
+        <article class="col-3">
+            <p>Enter a keyword(s)</p>
+            <ul>
+                <li><input id='searchTerm' type="text"></li>
+                <li><input id='searchIcon' type="image" src='images/search-icon.png'></li>
+            </ul>
+
+        </article>
+        <article class="col-9">
+            <p>Search Results</p>
+            <ul>
+                <li class='recipeItem'>
+                    <div class='recipeImage'><img src="" alt=""> </div>
+                    <div class='recipeName'></div>
+                    <div class="rating"></div>
+                    <div class="cuisine"></div>
+                    <div class="ingredients"></div>
+                    <div class="course"></div>
+                    <div><input type="button" value='Select This Recipe'></div>
+                </li>
+
+            </ul>
+        </article>
+    </main>
+    <main id='assign' class='col-12'>
+        <ul>
+            <li class="day"></li>
+        </ul>
+    </main>
+    <main id='ingredient1' class='col-12'>
+        Ingredient list
+    </main>
+    <main id='ingredient2' class='col-12'>
+        shopping list
+    </main>
+    <main id='menu' class='col-12'>
+        menu links
+    </main>
+    <footer>
+        <p> &copy;Terry Thompson
+            <a href="https://github.com/terrylthompsonintx"><img src="images/mark-github.png" alt="Git Hub Logo"></a>
+            <a href='mailto:TerryLThompsonintx@gmail.com'><img src="images/email.png" alt="Email Logo"></a>
+            <a href='https://www.linkedin.com/in/terrylthompson/'><img src="images/th.jpg" alt="linked in  Logo"></a>
+        </p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>;
+    <script src="client.js"></script>
 </body>
 
 </html>

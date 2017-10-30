@@ -1,0 +1,14 @@
+html {}
+
+footer img {
+    max-height: 30px;
+}
+
+#searchIcon {
+    max-height: 30px;
+}
+
+#search li {
+    display: inline-block;
+    text-decoration: none;
+}
