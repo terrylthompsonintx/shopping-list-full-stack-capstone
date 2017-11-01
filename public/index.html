@@ -14,10 +14,10 @@
     <main id='intro' class='col-12'>
         <p>This application allows you to:</p>
         <ul>
-            <li>Search for recipes. </li>
+            <li>Search for recipes.</li>
             <li>Select recipes and create a menu for a week.</li>
             <li>Create a shopping list for that menu.</li>
-            <li>View a page with links to your selected recipes.</li>
+            <li>View a web page with links to your selected recipes.</li>
         </ul>
         <input type="image" src="images/button_continue.png" id='continueButton' class='button'>
 
@@ -27,34 +27,119 @@
             <h2>Enter a keyword(s)</h2>
             <ul>
                 <li><input id='searchTerm' type="text"></li>
+                <li class="day">
+                    <select name="weekday" id="recipeSelect">
+                        <option value="sunday">Sunday</option>
+                        <option value="monday">Monday</option>
+                        <option value="tuesday">Tuesday</option>
+                        <option value="wednesday">Wendesday</option>
+                        <option value="thursday">Thursday</option>
+                        <option value="friday">Friday</option>
+                        <option value="saturday">Saturday</option>
+                    </select>
+                </li>
                 <li><input id='searchIcon' type="image" src='images/search-icon.png' class='button'></li>
             </ul>
             <p>Enter keyword and select push the search button.</p>
-        </article>
-        <article class="col-9">
-            <h2>Search Results</h2>
-            <ul>
-                <li class='recipeItem'>
-                    <div class='recipeImage'><img src="" alt=""> </div>
-                    <div class='recipeName'></div>
-                    <div class="rating"></div>
-                    <div class="cuisine"></div>
-                    <div class="ingredients"></div>
-                    <div class="course"></div>
-                    <div><input type="image" src="images/button_select-this-recipe.png" id='selectButton' class='button'></div>
-                </li>
+            <ul class='day'>
+                <li>
+                    Sunday
 
+                </li>
+                <li>
+                    Monday
+
+                </li>
+                <li>
+                    Tuesday
+
+                </li>
             </ul>
         </article>
-        <input type="image" src="images/button_assign-recipes.png" id='assignButton' class='button'>
+        <article class='col-9'>
+            <h2>Search Results</h2>
+            <div class='boxed'>
+                <ul>
+                    <li class='recipeItem'>
+                        <div class='recipeImage'><img src="" alt=""> </div>
+                        <div class='recipeName'> chili</div>
+                        <div class="rating">***</div>
+                        <div class="cuisine">tex-mex</div>
+                        <div class="ingredients">
+                            <ul>
+                                <li>beans</li>
+                                <li>beans</li>
+                                <li>beans</li>
+                                <li>beans</li>
+                            </ul>
+                        </div>
+                        <div class="course">main</div>
+                        <div><input type="image" src="images/button_select-recipe.png" id='selectButton' class='button'></div>
+                    </li>
+
+
+                </ul>
+                <ul>
+                    <li class='recipeItem'>
+                        <div class='recipeImage'><img src="" alt=""> </div>
+                        <div class='recipeName'> chili</div>
+                        <div class="rating">***</div>
+                        <div class="cuisine">tex-mex</div>
+                        <div class="ingredients">
+                            <ul>
+                                <li>beans</li>
+                                <li>beans</li>
+                                <li>beans</li>
+                                <li>beans</li>
+                            </ul>
+                        </div>
+                        <div class="course">main</div>
+                        <div><input type="image" src="images/button_select-recipe.png" id='selectButton' class='button'></div>
+                    </li>
+
+
+                </ul>
+                <ul>
+                    <li class='recipeItem'>
+                        <div class='recipeImage'><img src="" alt=""> </div>
+                        <div class='recipeName'> chili</div>
+                        <div class="rating">***</div>
+                        <div class="cuisine">tex-mex</div>
+                        <div class="ingredients">
+                            <ul>
+                                <li>beans</li>
+                                <li>beans</li>
+                                <li>beans</li>
+                                <li>beans</li>
+                            </ul>
+                        </div>
+                        <div class="course">main</div>
+                        <div><input type="image" src="images/button_select-recipe.png" id='selectButton' class='button'></div>
+                    </li>
+
+
+                </ul>
+
+            </div>
+        </article>
+        <input type="image" src="images/button_create-shopping-list.png" id='assignButton' class='button'>
     </main>
-    <main id='assign' class='col-12'>
+    <!--<main id='assign' class='col-12'>
         <h2>Assign recipes to the day of the week.</h2>
         <ul>
-            <li class="day"><select name="weekday" id="recipeSelect"></select></li>
+            <li class="day">
+                <select name="weekday" id="recipeSelect">
+                <option value="sunday">Sunday</option>
+                <option value="monday">Monday</option>
+                <option value="tuesday">Tuesday</option>
+                <option value="wednesday">Wendesday</option>
+                <option value="thursday">Thursday</option>
+                <option value="friday">Friday</option>
+                <option value="saturday">Saturday</option>
+            </select></li>
         </ul>
         <input type="image" src="images/button_create-shopping-list.png" id='shoppingListButton' class='button'>
-    </main>
+    </main> -->
     <main id='ingredient1' class='col-12'>
         <h2>Ingredient list</h2>
         <input type="image" src="images/button_create-final-shopping-list.png" id='finalShoppingButton' class='button'>

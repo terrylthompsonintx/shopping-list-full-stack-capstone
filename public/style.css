@@ -6,7 +6,11 @@ html {
 body {
     text-align: center;
     font-family: 'Indie Flower', cursive;
-    font-weight: 120;
+    font-weight: bold;
+}
+
+ul {
+    list-style-position: inside;
 }
 
 footer img {
@@ -20,6 +24,10 @@ footer img {
 #search li {
     display: inline-block;
     text-decoration: none;
+}
+
+.day li {
+    display: block;
 }
 
 a:hover {
@@ -40,8 +48,11 @@ a:hover {
     transform: translateY(4px);
 }
 
-.box {
+.boxed {
     border-style: solid;
+    width: 100%;
+    min-height: 200px;
+    overflow: scroll;
 }
 
 footer li {
