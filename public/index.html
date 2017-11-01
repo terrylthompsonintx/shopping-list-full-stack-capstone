@@ -9,7 +9,7 @@
 
 <body>
     <header>
-        Cooking is cool.
+        <h1>Cooking is cool</h1>
     </header>
     <main id='intro' class='col-12'>
         <p>This application allows you to:</p>
@@ -24,15 +24,15 @@
     </main>
     <main id='search' class='col-12'>
         <article class="col-3">
-            <p>Enter a keyword(s)</p>
+            <h2>Enter a keyword(s)</h2>
             <ul>
                 <li><input id='searchTerm' type="text"></li>
                 <li><input id='searchIcon' type="image" src='images/search-icon.png'></li>
             </ul>
-
+            <p>Enter keyword and select push the search button.</p>
         </article>
         <article class="col-9">
-            <p>Search Results</p>
+            <h2>Search Results</h2>
             <ul>
                 <li class='recipeItem'>
                     <div class='recipeImage'><img src="" alt=""> </div>
@@ -48,18 +48,20 @@
         </article>
     </main>
     <main id='assign' class='col-12'>
+        <h2>Assign recipes to the day of the week.</h2>
         <ul>
-            <li class="day"></li>
+            <li class="day"><select name="weekday" id="recipeSelect"></select></li>
         </ul>
+
     </main>
     <main id='ingredient1' class='col-12'>
-        Ingredient list
+        <h2>Ingredient list</h2>
     </main>
     <main id='ingredient2' class='col-12'>
-        shopping list
+        <h2>Shopping list</h2>
     </main>
     <main id='menu' class='col-12'>
-        menu links
+        <h2>Menu Links</h2>
     </main>
     <footer>
         <p> &copy;Terry Thompson
