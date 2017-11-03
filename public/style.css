@@ -1,6 +1,8 @@
 html {
     background: url("images/bg.jpg")center no-repeat;
-    background-size: 100% 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
 }
 
 body {
@@ -9,7 +11,7 @@ body {
     font-weight: bold;
 }
 
-ul {
+#intro ul {
     list-style-position: inside;
 }
 
@@ -21,13 +23,8 @@ footer img {
     max-height: 30px;
 }
 
-#search li {
-    display: inline-block;
-    text-decoration: none;
-}
-
-.day li {
-    display: block;
+#searchBox {
+    list-style-type: none;
 }
 
 a:hover {

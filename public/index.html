@@ -23,10 +23,12 @@
 
     </main>
     <main id='search' class='col-12'>
-        <article class="col-3">
-            <h2>Enter a keyword(s)</h2>
+        <article class="col-3" id='searchBox'>
+
             <ul>
-                <li><input id='searchTerm' type="text"></li>
+                <li>
+                    <h2>Select a day.</h2>
+                </li>
                 <li class="day">
                     <select name="weekday" id="recipeSelect">
                         <option value="sunday">Sunday</option>
@@ -38,12 +40,19 @@
                         <option value="saturday">Saturday</option>
                     </select>
                 </li>
+                <li>Search for a recipe.</li>
+                <li><input id='searchTerm' type="text"></li>
+
                 <li><input id='searchIcon' type="image" src='images/search-icon.png' class='button'></li>
             </ul>
-            <p>Enter keyword and select push the search button.</p>
+
             <ul class='day'>
                 <li>
                     Sunday
+                    <ul>
+                        <li><a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/">Chili</a></li>
+                        <li><a href="http://allrecipes.com/recipe/16573/chicken-fried-chicken/">Fried Chicken</a></li>
+                    </ul>
 
                 </li>
                 <li>
@@ -54,71 +63,38 @@
                     Tuesday
 
                 </li>
+                <li>Wednesday</li>
+                <li>Thursday</li>
+                <li>Friday</li>
+                <li>Saturday</li>
+
             </ul>
         </article>
         <article class='col-9'>
             <h2>Search Results</h2>
             <div class='boxed'>
-                <ul>
+                <ul class='col-3'>
                     <li class='recipeItem'>
-                        <div class='recipeImage'><img src="" alt=""> </div>
-                        <div class='recipeName'> chili</div>
-                        <div class="rating">***</div>
-                        <div class="cuisine">tex-mex</div>
+                        <div class='recipeName'>Recipe Name: <a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/" target="_blank">chili</a></div>
+                        <div class="rating">Rating: ***</div>
+                        <div class="cuisine">Cuisine: tex-mex</div>
+                        <div class="course">Course: Main</div>
+
                         <div class="ingredients">
-                            <ul>
+                            <ol>
                                 <li>beans</li>
                                 <li>beans</li>
                                 <li>beans</li>
                                 <li>beans</li>
-                            </ul>
+                            </ol>
                         </div>
-                        <div class="course">main</div>
+
                         <div><input type="image" src="images/button_select-recipe.png" id='selectButton' class='button'></div>
                     </li>
-
-
                 </ul>
-                <ul>
-                    <li class='recipeItem'>
-                        <div class='recipeImage'><img src="" alt=""> </div>
-                        <div class='recipeName'> chili</div>
-                        <div class="rating">***</div>
-                        <div class="cuisine">tex-mex</div>
-                        <div class="ingredients">
-                            <ul>
-                                <li>beans</li>
-                                <li>beans</li>
-                                <li>beans</li>
-                                <li>beans</li>
-                            </ul>
-                        </div>
-                        <div class="course">main</div>
-                        <div><input type="image" src="images/button_select-recipe.png" id='selectButton' class='button'></div>
-                    </li>
 
 
-                </ul>
-                <ul>
-                    <li class='recipeItem'>
-                        <div class='recipeImage'><img src="" alt=""> </div>
-                        <div class='recipeName'> chili</div>
-                        <div class="rating">***</div>
-                        <div class="cuisine">tex-mex</div>
-                        <div class="ingredients">
-                            <ul>
-                                <li>beans</li>
-                                <li>beans</li>
-                                <li>beans</li>
-                                <li>beans</li>
-                            </ul>
-                        </div>
-                        <div class="course">main</div>
-                        <div><input type="image" src="images/button_select-recipe.png" id='selectButton' class='button'></div>
-                    </li>
 
-
-                </ul>
 
             </div>
         </article>
