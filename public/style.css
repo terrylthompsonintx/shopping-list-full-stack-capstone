@@ -23,7 +23,19 @@ footer img {
     max-height: 30px;
 }
 
-#searchBox {
+#ingredient1 li {
+    list-style-type: none;
+}
+
+#ingredient2 li {
+    list-style-type: none;
+}
+
+#menu li {
+    list-style-type: none;
+}
+
+#search ul li {
     list-style-type: none;
 }
 
