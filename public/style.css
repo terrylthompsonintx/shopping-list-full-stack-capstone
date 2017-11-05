@@ -11,7 +11,24 @@ body {
     font-weight: bold;
 }
 
-#intro ul {
+h1 {
+    font-size: 300%;
+}
+
+h2 {
+    font-size: 200%;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+h3 {
+    font-size: 150%;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+ul,
+ol {
     list-style-position: inside;
 }
 
@@ -35,33 +52,54 @@ footer img {
     list-style-type: none;
 }
 
-#search ul li {
+#search ul>li {
     list-style-type: none;
 }
 
+.list li {
+    list-style-type: integer;
+}
+
 a:hover {
-    text-size: 110%;
+    font-size: 110%;
 }
 
 .button {
+    margin-top: 10px;
     cursor: pointer;
     outline: none;
     border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
+    border-radius: 0;
+    box-shadow: 0px 0px 20px #999;
 }
 
-//.button:hover {background-color: #3e8e41}
+
+/*.button:hover {background-color: #3e8e41}*/
+
 .button:active {
-    box-shadow: 0 5px #666;
+    /*    box-shadow: 0 5px #666;*/
+    box-shadow: 0px 0px 20px #000;
     transform: translateY(4px);
 }
 
 .boxed {
-    border-style: solid;
     width: 100%;
-    min-height: 200px;
-    overflow: scroll;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.boxed:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.marius-button {
+    background-image: url(images/button-bg.png);
+    background-repeat: repeat-x;
+    background-position: center;
+    font-color: white;
+    font-size: 150%;
 }
 
 footer li {

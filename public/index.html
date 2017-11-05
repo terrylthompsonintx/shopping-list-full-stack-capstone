@@ -19,17 +19,19 @@
             <li>Create a shopping list for that menu.</li>
             <li>View a web page with links to your selected recipes.</li>
         </ul>
-        <input type="image" src="images/button_continue.png" id='continueButton' class='button'>
+        <div class='col-12'><button id='selectButton' class='button marius-button'>Continue</button></div>
 
     </main>
-    <main id='search' class='col-12'>
+
+    <!-- <main id='search' class='col-12'>
+
         <article class="col-3" id='searchBox'>
 
             <ul>
                 <li>
                     <h2>Select a day.</h2>
                 </li>
-                <li class="day">
+                <li>
                     <select name="weekday" id="recipeSelect">
                         <option value="sunday">Sunday</option>
                         <option value="monday">Monday</option>
@@ -46,7 +48,7 @@
                 <li><input id='searchIcon' type="image" src='images/search-icon.png' class='button'></li>
             </ul>
 
-            <ul class='day'>
+            <ul>
                 <li>
                     Sunday
                     <ul>
@@ -70,7 +72,7 @@
 
             </ul>
         </article>
-        <article class='col-9'>
+        <article class='col-9 list'>
             <h2>Search Results</h2>
             <div class='boxed'>
                 <ul class='col-3'>
@@ -89,54 +91,19 @@
                             </ol>
                         </div>
 
-                        <div><input type="image" src="images/button_select-recipe.png" id='selectButton' class='button'></div>
+                        <div><button id='selectButton' class='button marius-button'>Select Recipe</button></div>
+                        <!--                        <div><input type="image" src="images/button_select-recipe.png" id='selectButton' class='button'></div>
                     </li>
                 </ul>
-                <ul class='col-3'>
-                    <li class='recipeItem'>
-                        <div class='recipeName'>Recipe Name: <a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/" target="_blank">chili</a></div>
-                        <div class="rating">Rating: ***</div>
-                        <div class="cuisine">Cuisine: tex-mex</div>
-                        <div class="course">Course: Main</div>
 
-                        <div class="ingredients">
-                            <ol>
-                                <li>beans</li>
-                                <li>beans</li>
-                                <li>beans</li>
-                                <li>beans</li>
-                            </ol>
-                        </div>
-
-                        <div><input type="image" src="images/button_select-recipe.png" id='selectButton' class='button'></div>
-                    </li>
-                </ul>
-                <ul class='col-3'>
-                    <li class='recipeItem'>
-                        <div class='recipeName'>Recipe Name: <a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/" target="_blank">chili</a></div>
-                        <div class="rating">Rating: ***</div>
-                        <div class="cuisine">Cuisine: tex-mex</div>
-                        <div class="course">Course: Main</div>
-
-                        <div class="ingredients">
-                            <ol>
-                                <li>beans</li>
-                                <li>beans</li>
-                                <li>beans</li>
-                                <li>beans</li>
-                            </ol>
-                        </div>
-
-                        <div><input type="image" src="images/button_select-recipe.png" id='selectButton' class='button'></div>
-                    </li>
-                </ul>
 
 
 
 
             </div>
         </article>
-        <input type="image" src="images/button_create-shopping-list.png" id='assignButton' class='button'>
+        <div class='col-12'> <input type="image" src="images/button_create-shopping-list.png" id='assignButton' class='button'></div>
+
     </main>
 
     <main id='ingredient1' class='col-12'>
@@ -262,59 +229,58 @@
         <h2>Menu Links</h2>
         <ul class='day'>
             <li>
-                <h3>Sunday</h3 <ul>
+                <h3>Sunday</h3>
                 <li><a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/">Chili</a></li>
                 <li><a href="http://allrecipes.com/recipe/16573/chicken-fried-chicken/">Fried Chicken</a></li>
-        </ul>
 
-        </li>
-        <li>
-            <h3>Monday</h3 <ul>
-            <li><a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/">Chili</a></li>
-            <li><a href="http://allrecipes.com/recipe/16573/chicken-fried-chicken/">Fried Chicken</a></li>
-            </ul>
 
-        </li>
-        <li>
-            <h3>Tuesday</h3 <ul>
-            <li><a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/">Chili</a></li>
-            <li><a href="http://allrecipes.com/recipe/16573/chicken-fried-chicken/">Fried Chicken</a></li>
-            </ul>
 
-        </li>
-        <li>
-            <h3>Wednesday</h3 <ul>
-            <li><a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/">Chili</a></li>
-            <li><a href="http://allrecipes.com/recipe/16573/chicken-fried-chicken/">Fried Chicken</a></li>
-            </ul>
+                <li>
+                    <h3>Monday</h3 <ul>
+                    <li><a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/">Chili</a></li>
+                    <li><a href="http://allrecipes.com/recipe/16573/chicken-fried-chicken/">Fried Chicken</a></li>
 
-        </li>
-        <li>
-            <h3>Thursday</h3 <ul>
-            <li><a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/">Chili</a></li>
-            <li><a href="http://allrecipes.com/recipe/16573/chicken-fried-chicken/">Fried Chicken</a></li>
-            </ul>
 
-        </li>
-        <li>
-            <h3>Friday</h3 <ul>
-            <li><a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/">Chili</a></li>
-            <li><a href="http://allrecipes.com/recipe/16573/chicken-fried-chicken/">Fried Chicken</a></li>
-            </ul>
+                </li>
+                <li>
+                    <h3>Tuesday</h3 <ul>
+                    <li><a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/">Chili</a></li>
+                    <li><a href="http://allrecipes.com/recipe/16573/chicken-fried-chicken/">Fried Chicken</a></li>
 
-        </li>
-        <li>
-            <h3>Saturday</h3 <ul>
-            <li><a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/">Chili</a></li>
-            <li><a href="http://allrecipes.com/recipe/16573/chicken-fried-chicken/">Fried Chicken</a></li>
-            </ul>
 
-        </li>
+                </li>
+                <li>
+                    <h3>Wednesday</h3 <ul>
+                    <li><a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/">Chili</a></li>
+                    <li><a href="http://allrecipes.com/recipe/16573/chicken-fried-chicken/">Fried Chicken</a></li>
+
+                </li>
+                <li>
+                    <h3>Thursday</h3 <ul>
+                    <li><a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/">Chili</a></li>
+                    <li><a href="http://allrecipes.com/recipe/16573/chicken-fried-chicken/">Fried Chicken</a></li>
+
+
+                </li>
+                <li>
+                    <h3>Friday</h3 <ul>
+                    <li><a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/">Chili</a></li>
+                    <li><a href="http://allrecipes.com/recipe/16573/chicken-fried-chicken/">Fried Chicken</a></li>
+
+
+                </li>
+                <li>
+                    <h3>Saturday</h3 <ul>
+                    <li><a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/">Chili</a></li>
+                    <li><a href="http://allrecipes.com/recipe/16573/chicken-fried-chicken/">Fried Chicken</a></li>
+
+
+                </li>
 
 
         </ul>
         <input type="image" src="images/button_finished-cooking.png" id='continueButton' class='button'>
-    </main>
+    </main> -->
     <footer>
         <ul>
             <li>&copy;Terry Thompson</li>
