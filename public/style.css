@@ -12,6 +12,36 @@ body {
     font-weight: bold;
 }
 
+a {
+    text-decoration: none;
+    display: inline-block;
+}
+
+a:link {
+    color: black;
+}
+
+
+/* visited link */
+
+a:visited {
+    color: black;
+}
+
+
+/* mouse over link */
+
+a:hover {
+    font-weight: 120%;
+}
+
+
+/* selected link */
+
+a:active {
+    color: black;
+}
+
 h1 {
     font-size: 300%;
 }
@@ -79,31 +109,6 @@ a:hover {
     font-size: 120%;
     padding: 5px 10px;
     border-radius: 5px;
-}
-
-a:link {
-    color: black;
-}
-
-
-/* visited link */
-
-a:visited {
-    color: black;
-}
-
-
-/* mouse over link */
-
-a:hover {
-    font-weight: 120%;
-}
-
-
-/* selected link */
-
-a:active {
-    color: black;
 }
 
 
