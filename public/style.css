@@ -1,8 +1,9 @@
 html {
-    background: url("images/bg.jpg")center no-repeat;
+    background: url("images/bg.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
+    background-size: cover;
 }
 
 body {
@@ -61,16 +62,48 @@ footer img {
 }
 
 a:hover {
-    font-size: 110%;
+    font-size: 130%;
 }
 
 .button {
     margin-top: 10px;
+    margin-bottom: 10px;
     cursor: pointer;
     outline: none;
     border: none;
     border-radius: 0;
     box-shadow: 0px 0px 20px #999;
+    background-image: url(images/button-bg.png);
+    background-repeat: repeat-x;
+    background-position: center;
+    font-size: 120%;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+a:link {
+    color: black;
+}
+
+
+/* visited link */
+
+a:visited {
+    color: black;
+}
+
+
+/* mouse over link */
+
+a:hover {
+    font-weight: 120%;
+}
+
+
+/* selected link */
+
+a:active {
+    color: black;
 }
 
 
@@ -92,14 +125,6 @@ a:hover {
     content: "";
     display: table;
     clear: both;
-}
-
-.marius-button {
-    background-image: url(images/button-bg.png);
-    background-repeat: repeat-x;
-    background-position: center;
-    font-color: white;
-    font-size: 150%;
 }
 
 footer li {
