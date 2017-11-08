@@ -26,10 +26,30 @@ const recipeItem = {
     cuisine: '',
     course: '',
     day: '',
-    ingredintS: []
+    ingredeintS: []
 
 }
-//funtion sendSearch() {};
+
+function sendSearch(getSearchData, serverUrl) {
+    $.ajax({
+            type: "POST",
+            url: serverUrl + '/search' + getSearchData,
+            dataType: 'json',
+        })
+        .done(function (dataOutput) {
+
+
+        })
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+        });
+};
+
+function buildRecipeList() {
+
+};
 
 function buildShoppingList() {
     //accepts array of ingredients
@@ -46,17 +66,17 @@ function buildMenulist() {
 
 $('#searchIcon').click(function () {
     getSearchData.searchString = $('#searchTerm').val();
-    //getSearchData.searchString = document.getElementById("searchTerm").value = "";
+
 
     console.log(getSearchData.searchString);
-    //sendSearch();
+    sendSearch();
 });
 
 
-//$('deleteItem').click(function () {
+/*$('deleteItem').click(function () {
 
-//});
+});
 
-//$('itemInBasket').click(function () {
+$('itemInBasket').click(function () {
 
-//});
+});*/

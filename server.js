@@ -12,13 +12,15 @@ var searchTermYummly = '';
 function callYummly(searchTermYummly) {
     var query = yummlyRecipe + '_app_id=' + appId + '&_app_key=' + yummlyKey + '&' + searchTermYummly;
     console.log(query);
-    //$.getJSON(youTubeSearchApiUrl, query, recipelist);
+    $.getJSON();
 };
 
-app.put('/search', (req, res) => {});
+/*app.post('/search', (req, res) => {
+    callYummly =
+});*/
 
 
-app.delete('/:id', (req, res) => {});
+
 
 const app = express();
 app.use(express.static('public'));
