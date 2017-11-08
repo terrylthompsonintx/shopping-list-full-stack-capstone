@@ -1,29 +1,62 @@
 //STEP 1 - functions and objects definitions
-const yummlyKey = '971c769d4bab882dc3281f0dc6131324';
-const appId = '35372e2c';
-const yummlyEndPoint = 'http://api.yummly.com/v1';
-const yummlyRecipe = 'http://api.yummly.com/v1/api/recipes?'
-var searchTermYummly = 'test';
 
 
+const serverUrl = 'http://localhost:8080';
 
-function callYummly(searchTermYummly) {
-    var query = yummlyRecipe + '_app_id=' + appId + '&_app_key=' + yummlyKey + '&' + searchTermYummly;
-    console.log(query);
-    //$.getJSON(youTubeSearchApiUrl, query, recipelist);
+const getSearchData = {
+    searchString: ''
+}
+const menuLink = {
+    day: '',
+    url: ''
 };
 
-//function recipelist();
+const ingredient = {
+    name: '',
+    qty: '',
+    inBasket: 0,
+    inPantry: 0
+};
+
+
+const recipeItem = {
+    name: '',
+    url: '',
+    rating: '',
+    cuisine: '',
+    course: '',
+    day: '',
+    ingredintS: []
+
+}
+//funtion sendSearch() {};
+
+function buildShoppingList() {
+    //accepts array of ingredients
+};
+
+function buildMenulist() {
+    //accepts array of links and builds links
+};
 
 //STEP 2 - functions and objects usage
 
-$('#continueButton').click(function () {
 
-})
+
 
 $('#searchIcon').click(function () {
-    searchTermYummly = $('#searchTerm').val();
-    document.getElementById("searchTerm").value = "";
-    callYummly(searchTermYummly);
+    getSearchData.searchString = $('#searchTerm').val();
+    //getSearchData.searchString = document.getElementById("searchTerm").value = "";
 
-})
+    console.log(getSearchData.searchString);
+    //sendSearch();
+});
+
+
+//$('deleteItem').click(function () {
+
+//});
+
+//$('itemInBasket').click(function () {
+
+//});
