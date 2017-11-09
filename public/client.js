@@ -1,11 +1,8 @@
 //STEP 1 - functions and objects definitions
 
 
-const serverUrl = 'http://localhost:8080';
 
-const getSearchData = {
-    searchString: ''
-}
+
 const menuLink = {
     day: '',
     url: ''
@@ -30,14 +27,14 @@ const recipeItem = {
 
 }
 
-function sendSearch(getSearchData, serverUrl) {
+function sendRecepiesSearch(getSearchData) {
     $.ajax({
-            type: "POST",
-            url: serverUrl + '/search' + getSearchData,
+            type: "GET",
+            url: '/search-recipes/' + getSearchData,
             dataType: 'json',
         })
         .done(function (dataOutput) {
-
+            console.log(dataOutput);
 
         })
         .fail(function (jqXHR, error, errorThrown) {
@@ -65,11 +62,10 @@ function buildMenulist() {
 
 
 $('#searchIcon').click(function () {
-    getSearchData.searchString = $('#searchTerm').val();
+    let searchString = $('#searchTerm').val();
 
-
-    console.log(getSearchData.searchString);
-    sendSearch();
+    console.log(searchString);
+    sendRecepiesSearch(searchString);
 });
 
 
