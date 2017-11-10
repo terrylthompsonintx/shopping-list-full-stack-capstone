@@ -5,6 +5,8 @@ var unirest = require('unirest');
 var events = require('events');
 const mongoose = require('mongoose');
 var config = require('./config');
+
+var activity = require('./models/recipe');
 const bodyParser = require('body-parser');
 const app = express();
 app.use(express.static('public'));
@@ -84,6 +86,27 @@ app.get('/search-recipes/:name', (req, res) => {
         res.sendStatus(code);
     });
 
+});
+
+
+app.post('/add-recipe-db', function (req, res) {
+
+    //db connection and data queries
+    recipe.create({
+        name: req.body.name,
+        rating: req.body.rating,
+        course: req.body.course,
+        id: req.body.id,
+        day: req.body.day
+
+    }, function (err, item) {
+        if (err) {
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        }
+        res.status(201).json(item);
+    });
 });
 
 
