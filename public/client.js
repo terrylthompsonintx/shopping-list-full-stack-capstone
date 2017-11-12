@@ -56,6 +56,17 @@ function buildRecipeList(dataOutput, searchWeekDay) {
             buildHtml += "<input type='hidden' class='storeToDbCourse' value='" + value.attributes.course + "'>";
             buildHtml += "<input type='hidden' class='storeToDbId' value='" + value.id + "'>";
             buildHtml += "<input type='hidden' class='storeToDay' value='" + searchWeekDay + "'>";
+
+            buildHtml += '<button class="previewButton" >Preview Recipe</button>';
+
+            buildHtml += "</form>";
+            buildHtml += "<form class='storeToDb'>";
+            buildHtml += "<input type='hidden' class='storeToDbName' value='" + value.recipeName + "'>";
+            buildHtml += "<input type='hidden' class='storeToDbRating' value='" + value.rating + "'>";
+            buildHtml += "<input type='hidden' class='storeToDbCourse' value='" + value.attributes.course + "'>";
+            buildHtml += "<input type='hidden' class='storeToDbId' value='" + value.id + "'>";
+            buildHtml += "<input type='hidden' class='storeToDay' value='" + searchWeekDay + "'>";
+
             buildHtml += '<button class="selectButton" >Select Recipe</button>';
 
             buildHtml += "</form>";
@@ -101,7 +112,7 @@ function buildMenulist() {
 
 
 
-
+//Event handler for search button
 $('#searchIcon').on('click', function () {
     let searchString = $('#searchTerm').val();
     let searchWeekDay = $('#recipeDay').val();
@@ -112,6 +123,7 @@ $('#searchIcon').on('click', function () {
     sendRecepiesSearch(searchString, searchWeekDay);
 });
 
+//Event handler for select button on recipes
 $(document).on('click', '.selectButton', function (event) {
     event.preventDefault();
     $(this).toggleClass("highlight");
@@ -139,7 +151,7 @@ $(document).on('click', '.selectButton', function (event) {
         'id': recipeIdValue,
         'day': recipeDayValue
     };
-    console.log(recipeObject);
+    //console.log(recipeObject);
     $.ajax({
             method: 'POST',
             dataType: 'json',
@@ -150,6 +162,42 @@ $(document).on('click', '.selectButton', function (event) {
         .done(function (result) {
 
             populateFavoritesContainer();
+        })
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+        });
+});
+
+//Event handler for preview button
+$(document).on('click', '.previewButton', function (event) {
+    event.preventDefault();
+    console.log('previewbutton pushed');
+
+
+
+
+    var precipeIdValue = $(this).parent().find('.storeToDbId').val();
+
+
+    var precipeId = {
+
+        'id': precipeIdValue,
+
+    };
+    console.log(precipeId);
+    $.ajax({
+            method: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(precipeId),
+            url: '/getrecipe/',
+        })
+        .done(function (result) {
+
+
+
         })
         .fail(function (jqXHR, error, errorThrown) {
             console.log(jqXHR);

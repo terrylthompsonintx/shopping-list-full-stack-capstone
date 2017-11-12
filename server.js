@@ -49,6 +49,27 @@ var getRecepiesFromYum = function (searchTerm) {
     unirest.get("http://api.yummly.com/v1/api/recipes?_app_id=35372e2c&_app_key=971c769d4bab882dc3281f0dc6131324&q=" + searchTerm)
         .header("Accept", "application/json")
         .end(function (result) {
+            // console.log(result.status, result.headers, result.body);
+            //success scenario
+            if (result.ok) {
+                emitter.emit('end', result.body);
+            }
+            //failure scenario
+            else {
+                emitter.emit('error', result.code);
+            }
+        });
+
+    return emitter;
+};
+var getSingleFromYum = function (recipeId) {
+    console.log(recipeId);
+    var emitter = new events.EventEmitter();
+    //console.log("inside getFromActive function");
+    console.log("http://api.yummly.com/v1/api/recipe/" + recipeId + "?_app_id=35372e2c&_app_key=971c769d4bab882dc3281f0dc6131324");
+    unirest.get("http://api.yummly.com/v1/api/recipe/" + recipeId + "?_app_id=35372e2c&_app_key=971c769d4bab882dc3281f0dc6131324")
+        .header("Accept", "application/json")
+        .end(function (result) {
             console.log(result.status, result.headers, result.body);
             //success scenario
             if (result.ok) {
@@ -62,16 +83,11 @@ var getRecepiesFromYum = function (searchTerm) {
 
     return emitter;
 };
-/*function callYummly(searchTermYummly) {
-    var query = yummlyRecipe + '_app_id=' + appId + '&_app_key=' + yummlyKey + '&' + searchTermYummly;
-    console.log(query);
-
-};*/
 
 //internal api end points
 
 app.get('/search-recipes/:name', (req, res) => {
-    console.log(req);
+    //console.log(req);
     //    external api function call and response
 
     var searchReq = getRecepiesFromYum(req.params.name);
@@ -88,8 +104,26 @@ app.get('/search-recipes/:name', (req, res) => {
 
 });
 
+app.get('/getrecipe/:id', (req, res) => {
 
-app.post('/add-recipe-db', function (req, res) {
+    console.log('getrcipe');
+    //    external api function call and response
+
+    var aRecipe = getSingleFromYum(req.params.id);
+
+    //get the data from the first api call
+    aRecipe.on('end', function (item) {
+        res.json(item);
+    });
+
+    //error handling
+    aRecipe.on('error', function (code) {
+        res.sendStatus(code);
+    });
+
+});
+
+app.post('/add-recipe-db/', function (req, res) {
 
     //db connection and data queries
     recipe.create({
