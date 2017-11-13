@@ -21,6 +21,10 @@ var recipeSchema = new mongoose.Schema({
     day: {
         type: String,
         required: false
+    },
+    ingredients: {
+        type: String,
+        required: false
     }
 
 

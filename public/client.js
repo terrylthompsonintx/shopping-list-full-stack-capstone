@@ -19,13 +19,16 @@ const ingredient = {
 
 function buildRecipeList(dataOutput, searchWeekDay) {
 
-    //console.log(recipesFound);
+    //console.log(dataOutput);
     var buildHtml = '';
     $.each(dataOutput.matches,
         function (key, value) {
             buildHtml += '<ul class="col-3">';
             buildHtml += '<li>';
             buildHtml += value.recipeName;
+            buildHtml += ' <a href="https://www.yummly.com/#recipe/' + value.id + '" target="_blank" alt="Link to Yummly Recipe" title="Link to Yummly Recipe">';
+            buildHtml += '<i class="fa fa-info-circle" aria-hidden="true"></i>';
+            buildHtml += '</a>';
             buildHtml += '</li>';
             buildHtml += '<li>';
             buildHtml += 'Rating: ' + value.rating;
@@ -57,7 +60,7 @@ function buildRecipeList(dataOutput, searchWeekDay) {
             buildHtml += "<input type='hidden' class='storeToDbId' value='" + value.id + "'>";
             buildHtml += "<input type='hidden' class='storeToDay' value='" + searchWeekDay + "'>";
 
-            buildHtml += '<button class="previewButton" >Preview Recipe</button>';
+            //buildHtml += '<button class="previewButton" >Preview Recipe</button>';
 
             buildHtml += "</form>";
             buildHtml += "<form class='storeToDb'>";
@@ -116,9 +119,6 @@ function buildMenulist() {
 $('#searchIcon').on('click', function () {
     let searchString = $('#searchTerm').val();
     let searchWeekDay = $('#recipeDay').val();
-
-
-
     console.log(searchString);
     sendRecepiesSearch(searchString, searchWeekDay);
 });
@@ -127,7 +127,7 @@ $('#searchIcon').on('click', function () {
 $(document).on('click', '.selectButton', function (event) {
     event.preventDefault();
     $(this).toggleClass("highlight");
-    console.log('buttonpush');
+    //console.log('buttonpush');
 
     /* buildHtml += "<form class='storeToDb'>";
      buildHtml += "<input type='hidden' class='storeToDbName' value='" + value.recipeName + "'>";
@@ -149,7 +149,8 @@ $(document).on('click', '.selectButton', function (event) {
         'rating': recipeRatingValue,
         'course': recipeCourseValue,
         'id': recipeIdValue,
-        'day': recipeDayValue
+        'day': recipeDayValue,
+
     };
     //console.log(recipeObject);
     $.ajax({
@@ -171,37 +172,23 @@ $(document).on('click', '.selectButton', function (event) {
 });
 
 //Event handler for preview button
-$(document).on('click', '.previewButton', function (event) {
+/*$(document).on('click', '.previewButton', function (event) {
     event.preventDefault();
     console.log('previewbutton pushed');
 
-
-
-
     var precipeIdValue = $(this).parent().find('.storeToDbId').val();
 
-
-    var precipeId = {
-
-        'id': precipeIdValue,
-
-    };
-    console.log(precipeId);
+    console.log(precipeIdValue);
     $.ajax({
-            method: 'POST',
+            type: "GET",
+            url: '/get-recipe/' + precipeIdValue,
             dataType: 'json',
-            contentType: 'application/json',
-            data: JSON.stringify(precipeId),
-            url: '/getrecipe/',
         })
         .done(function (result) {
-
-
-
-        })
+      })
         .fail(function (jqXHR, error, errorThrown) {
             console.log(jqXHR);
             console.log(error);
             console.log(errorThrown);
         });
-});
+});*/

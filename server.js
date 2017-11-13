@@ -6,7 +6,7 @@ var events = require('events');
 const mongoose = require('mongoose');
 var config = require('./config');
 
-var activity = require('./models/recipe');
+var recipe = require('./models/recipe');
 const bodyParser = require('body-parser');
 const app = express();
 app.use(express.static('public'));
@@ -70,7 +70,7 @@ var getSingleFromYum = function (recipeId) {
     unirest.get("http://api.yummly.com/v1/api/recipe/" + recipeId + "?_app_id=35372e2c&_app_key=971c769d4bab882dc3281f0dc6131324")
         .header("Accept", "application/json")
         .end(function (result) {
-            console.log(result.status, result.headers, result.body);
+            //console.log(result.status, result.headers, result.body);
             //success scenario
             if (result.ok) {
                 emitter.emit('end', result.body);
@@ -104,9 +104,9 @@ app.get('/search-recipes/:name', (req, res) => {
 
 });
 
-app.get('/getrecipe/:id', (req, res) => {
+app.get('/get-recipe/:id', (req, res) => {
 
-    console.log('getrcipe');
+    console.log(req.params.id);
     //    external api function call and response
 
     var aRecipe = getSingleFromYum(req.params.id);
@@ -125,22 +125,41 @@ app.get('/getrecipe/:id', (req, res) => {
 
 app.post('/add-recipe-db/', function (req, res) {
 
-    //db connection and data queries
-    recipe.create({
-        name: req.body.name,
-        rating: req.body.rating,
-        course: req.body.course,
-        id: req.body.id,
-        day: req.body.day
 
-    }, function (err, item) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Internal Server Error'
-            });
-        }
-        res.status(201).json(item);
+    let aRecipe = getSingleFromYum(req.body.id);
+
+    //get the data from the first api call
+    aRecipe.on('end', function (item) {
+
+        console.log(item.ingredientLines);
+        //db connection and data queries
+        recipe.create({
+            name: req.body.name,
+            rating: req.body.rating,
+            course: req.body.course,
+            id: req.body.id,
+            day: req.body.day,
+            ingredients: JSON.stringify(item.ingredientLines)
+
+        }, function (err, item) {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Internal Server Error'
+                });
+            }
+            res.status(201).json(item);
+        });
+
+
+        res.json(item);
     });
+
+    //error handling
+    aRecipe.on('error', function (code) {
+        res.sendStatus(code);
+    });
+
+
 });
 
 
