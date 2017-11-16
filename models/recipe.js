@@ -25,6 +25,10 @@ var recipeSchema = new mongoose.Schema({
     ingredients: {
         type: String,
         required: false
+    },
+    shortList: {
+        type: String,
+        required: false
     }
 
 

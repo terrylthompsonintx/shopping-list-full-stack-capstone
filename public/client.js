@@ -1,21 +1,19 @@
 //STEP 1 - functions and objects definitions
 
+var menu = '';
 
 
+//Populates Menu section of Search.html
+function addToMenu(recipeName, id, menu) {
+    var buildMenuHtml = '';
+    //buildMenuHtml += '<li><h3>' + $('#recipeDay').val() + '</h3></li>';
+    buildMenuHtml += '<li><a href="https://www.yummly.com/#recipe/' + id + '" target="_blank" alt="Link to Yummly Recipe" title="Link to Yummly Recipe">' + recipeName + ' </a></li>';
+    var dayId = '#' + $('#recipeDay').val();
+    $(dayId).append(buildMenuHtml);
+    menu += buildMenuHtml;
+    console.log(menu);
 
-const menuLink = {
-    day: '',
-    url: ''
 };
-
-const ingredient = {
-    name: '',
-    qty: '',
-    inBasket: 0,
-    inPantry: 0
-};
-
-
 
 function buildRecipeList(dataOutput, searchWeekDay) {
 
@@ -41,12 +39,15 @@ function buildRecipeList(dataOutput, searchWeekDay) {
             buildHtml += '</li>';
             buildHtml += '<li>';
 
-            buildHtml += '<ol class="ingredientBox">'
+            buildHtml += '<ol class="ingredientBox">';
+            let shortList = "";
             $.each(value.ingredients, function (subkey, subvalue) {
 
                 buildHtml += '<li>';
                 buildHtml += subvalue;
                 buildHtml += '</li>';
+
+                shortList += subvalue + ",";
 
             });
             buildHtml += '</ol>'
@@ -59,16 +60,7 @@ function buildRecipeList(dataOutput, searchWeekDay) {
             buildHtml += "<input type='hidden' class='storeToDbCourse' value='" + value.attributes.course + "'>";
             buildHtml += "<input type='hidden' class='storeToDbId' value='" + value.id + "'>";
             buildHtml += "<input type='hidden' class='storeToDay' value='" + searchWeekDay + "'>";
-
-            //buildHtml += '<button class="previewButton" >Preview Recipe</button>';
-
-            buildHtml += "</form>";
-            buildHtml += "<form class='storeToDb'>";
-            buildHtml += "<input type='hidden' class='storeToDbName' value='" + value.recipeName + "'>";
-            buildHtml += "<input type='hidden' class='storeToDbRating' value='" + value.rating + "'>";
-            buildHtml += "<input type='hidden' class='storeToDbCourse' value='" + value.attributes.course + "'>";
-            buildHtml += "<input type='hidden' class='storeToDbId' value='" + value.id + "'>";
-            buildHtml += "<input type='hidden' class='storeToDay' value='" + searchWeekDay + "'>";
+            buildHtml += "<input type='hidden' class='storeToShortList' value='" + shortList + "'>";
 
             buildHtml += '<button class="selectButton" >Select Recipe</button>';
 
@@ -126,23 +118,17 @@ $('#searchIcon').on('click', function () {
 //Event handler for select button on recipes
 $(document).on('click', '.selectButton', function (event) {
     event.preventDefault();
-    $(this).toggleClass("highlight");
+    //$(this).toggleClass("highlight");
     //console.log('buttonpush');
 
-    /* buildHtml += "<form class='storeToDb'>";
-     buildHtml += "<input type='hidden' class='storeToDbName' value='" + value.recipeName + "'>";
-     buildHtml += "<input type='hidden' class='storeToDbRating' value='" + value.rating + "'>";
-     buildHtml += "<input type='hidden' class='storeToDbCourse' value='" + value.attributes.course + "'>";
-     buildHtml += "<input type='hidden' class='storeToDbId' value='" + value.id + "'>";
-     buildHtml += '<button class="selectButton" >Select Recipe</button>';
 
-     buildHtml += "</form>";*/
 
     var recipeNameValue = $(this).parent().find('.storeToDbName').val();
     var recipeRatingValue = $(this).parent().find('.storeToDbRating').val();
     var recipeCourseValue = $(this).parent().find('.storeToDbCourse').val();
     var recipeIdValue = $(this).parent().find('.storeToDbId').val();
     var recipeDayValue = $(this).parent().find('.storeToDay').val();
+    var recipeStoreToShortList = $(this).parent().find('.storeToShortList').val();
 
     var recipeObject = {
         'name': recipeNameValue,
@@ -150,6 +136,7 @@ $(document).on('click', '.selectButton', function (event) {
         'course': recipeCourseValue,
         'id': recipeIdValue,
         'day': recipeDayValue,
+        'shortList': recipeStoreToShortList,
 
     };
     //console.log(recipeObject);
@@ -162,7 +149,7 @@ $(document).on('click', '.selectButton', function (event) {
         })
         .done(function (result) {
 
-            populateFavoritesContainer();
+            addToMenu(recipeObject.name, recipeObject.id);
         })
         .fail(function (jqXHR, error, errorThrown) {
             console.log(jqXHR);
@@ -171,24 +158,22 @@ $(document).on('click', '.selectButton', function (event) {
         });
 });
 
-//Event handler for preview button
-/*$(document).on('click', '.previewButton', function (event) {
-    event.preventDefault();
-    console.log('previewbutton pushed');
 
-    var precipeIdValue = $(this).parent().find('.storeToDbId').val();
+/*$('tempbutton').on('click', function {
+                   $.ajax({
+                   method: 'GET',
+                   dataType: 'json',
+                   contentType: 'application/json',
+                   url: '/get-recipes/',
+                   })
+    .done(function(result) {
+    console.log(result);
 
-    console.log(precipeIdValue);
-    $.ajax({
-            type: "GET",
-            url: '/get-recipe/' + precipeIdValue,
-            dataType: 'json',
-        })
-        .done(function (result) {
-      })
-        .fail(function (jqXHR, error, errorThrown) {
-            console.log(jqXHR);
-            console.log(error);
-            console.log(errorThrown);
-        });
-});*/
+})
+    .fail(function(jqXHR, error, errorThrown) {
+    console.log(jqXHR);
+    console.log(error);
+    console.log(errorThrown);
+});
+
+        } */
