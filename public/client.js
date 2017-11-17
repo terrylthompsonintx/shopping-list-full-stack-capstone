@@ -118,10 +118,6 @@ $('#searchIcon').on('click', function () {
 //Event handler for select button on recipes
 $(document).on('click', '.selectButton', function (event) {
     event.preventDefault();
-    //$(this).toggleClass("highlight");
-    //console.log('buttonpush');
-
-
 
     var recipeNameValue = $(this).parent().find('.storeToDbName').val();
     var recipeRatingValue = $(this).parent().find('.storeToDbRating').val();
@@ -159,21 +155,22 @@ $(document).on('click', '.selectButton', function (event) {
 });
 
 
-/*$('tempbutton').on('click', function {
-                   $.ajax({
-                   method: 'GET',
-                   dataType: 'json',
-                   contentType: 'application/json',
-                   url: '/get-recipes/',
-                   })
-    .done(function(result) {
-    console.log(result);
+$('#tempbutton').on('click', function (event) {
+    event.preventDefault();
+    $.ajax({
+            method: 'GET',
+            dataType: 'json',
+            contentType: 'application/json',
+            url: '/retrieve-recipes/',
+        })
+        .done(function (result) {
+            console.log(result);
 
-})
-    .fail(function(jqXHR, error, errorThrown) {
-    console.log(jqXHR);
-    console.log(error);
-    console.log(errorThrown);
+        })
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+        });
+
 });
-
-        } */

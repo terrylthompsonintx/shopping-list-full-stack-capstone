@@ -90,6 +90,55 @@ var getSingleFromYum = function (recipeId) {
     return emitter;
 };
 
+
+//function to check the ingredient short list and the detailed ingredient list and store them in the shopping list collection
+
+function storeShoppingList(ingredientsShortList, ingredientsDetails) {
+
+    //check if the input arrays are not empty
+    if ((ingredientsShortList.length != 0) && (ingredientsDetails.length != 0)) {
+        //loop the shortlist array
+
+
+        for (let i = 0; i < ingredientsShortList.length; i++) {
+            let foundDetailedtIngredient = 0;
+
+            //check if the short Ingredient name is not empty
+            if (ingredientsShortList[i] != "") {
+
+                //get one short Ingredient at a time
+                let shortIngredient = ingredientsShortList[i].toLowerCase();
+
+                //if the ingredient was not found yet
+                if (foundDetailedtIngredient == 0) {
+                    //for each one short Ingredient loop the ingredientsDetails
+                    for (let y = 0; y < ingredientsDetails.length; y++) {
+
+                        //check if the detailed Ingredient name is not empty
+                        if (ingredientsDetails[i] != "") {
+
+                            //get one detailed Ingredient at a time
+                            let detailedIngredient = ingredientsDetails[i].toLowerCase();
+
+                            //match the short Ingredient with the detailed Ingredient
+                            if (detailedIngredient.indexOf(shortIngredient) !== -1) {
+
+                                foundDetailedtIngredient++;
+                                console.log(i, shortIngredient, detailedIngredient);
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+        //check for existing data in DB.
+        //No Start adding.
+        //Yes check if ingredientsShortList is present
+        //no Add ingredientsShortList and ingredientsDetails as object.
+        //yes add ingredientsDetails to existing object.
+    }
+}
 //internal api end points
 
 app.get('/search-recipes/:name', (req, res) => {
@@ -143,24 +192,37 @@ app.get('/get-recipe/:id', (req, res) => {
     });
 
 });
-
-app.get('/retrieve-recipes', (req, res) => {
-    recipe
-        .find().then(recipes => {
-            res.json({
-                recipes: recipes.map(
-                    (recipe) => recipe.apiRepr())
+app.get('/retrieve-recipes/', function (req, res) {
+    recipe.find(function (err, item) {
+        //        console.log(item);
+        if (err) {
+            return res.status(500).json({
+                message: 'Internal Server Error'
             });
-        })
-        .catch(err => {
-            console.error(err);
-            res.status(500).json({
-                error: 'Error Reading'
-            });
-        });
+        }
+        res.status(200).json(item);
+    });
 });
 
-
+//app.get('/retrieve-recipes/', (req, res) => {
+//    var allrecipes = '';
+//    allrecipes = recipe.find();
+//    console.log(allrecipes);
+//    res.json(allrecipes);
+//
+//
+//});
+//app.get('/populate-favorites', function (req, res) {
+//    activity.find(function (err, item) {
+//        console.log(item);
+//        if (err) {
+//            return res.status(500).json({
+//                message: 'Internal Server Error'
+//            });
+//        }
+//        res.status(200).json(item);
+//    });
+// });
 app.post('/add-recipe-db/', function (req, res) {
 
 
@@ -169,6 +231,10 @@ app.post('/add-recipe-db/', function (req, res) {
 
     //get the data from the first api call
     aRecipe.on('end', function (item) {
+        //        console.log(req.body.shortList.split(","));
+        //        console.log(item.ingredientLines);
+
+        storeShoppingList(req.body.shortList.split(","), item.ingredientLines);
 
         //console.log(item.ingredientLines);
         //db connection and data queries
@@ -194,12 +260,12 @@ app.post('/add-recipe-db/', function (req, res) {
             ingredients: JSON.stringify(item.ingredientLines)
 
         }, function (err, item) {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Internal Server Error'
-                });
-            }
-            res.status(201).json(item);
+            //            if (err) {
+            //                return res.status(500).json({
+            //                    message: 'Internal Server Error'
+            //                });
+            //            }
+            //            res.status(201).json(item);
         });
 
 
