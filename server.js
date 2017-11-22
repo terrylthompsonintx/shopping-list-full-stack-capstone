@@ -149,73 +149,83 @@ function storeIngredient(shortList, qtyList) {
     //function takes two arrays from a recipe.  It ensure that the short list item is present in the qty item.  If so, it checks the shoppingList array to see if the shortlist item is present.  If so it adds the qty to the shortlist qty.
     //if its not present, it adds the shortlist item and qty to shopping list.
 
-
+    console.log(shortList, qtyList);
     for (let x = 0; x < qtyList.length; x++) {
         let shortListLower = shortList[x].toLowerCase();
-        let listCounter = 0;
+        //        let listCounter = 0;
         let found = 0;
-        while ((found != 1) && (listCounter < shortList.length)) {
-            let qtylistLower = qtyList[x].toLowerCase();
-            if (qtylistLower.indexOf(shortListLower) !== -1) {
-                found = 1;
-                console.log("line 159", shortListLower, qtylistLower);
-                list.create({
-                    ingredient: shortList[listCounter],
-                    qty: qtyList[x]
-
-                });
-            }
-
-            listCounter++;
-        }
-        listCounter = 0;
-        found = 0;
-        //        for (let e = 0; e < shortList.length; e++) {
+        //        while ((found != 1) && (listCounter < shortList.length)) {
         //            let qtylistLower = qtyList[x].toLowerCase();
-        //            console.log(shortListLower, qtylistLower);
-        //checks to see if shortlist item is present in
         //            if (qtylistLower.indexOf(shortListLower) !== -1) {
-        //            if (shortListLower.indexOf(qtylistLower) !== -1) {
-        //                console.log("line 159", shortListLower, qtylistLower);
-
-
-        //            if (shoppingList.length > 0) {
-        //                //search shopping list to see if ingredient present if the list is greater than 0
-        //                for (let t = 0; t < shoppingList.length; t++) {
-        //                    //iterates through shopping list
-        //                    let shoppingListLow = shoppingList[t];
-        //                    console.log(shoppingListLow);
-        //                    let shoppingListLower = shoppingListLow.toLowerCase();
-        //                    if (shoppingListLower == shortListLower) {
-        //                        //found in list
-        //                        let addqty = qtylist[x];
-        //                        shoppingList[t].qty.push(addqty);
-        //                        //adds it to the objects qty array.
-        //                        console.log(shoppinglist);
-        //                    } else {
-        //                        //not found in list
-        //                        let pushQty = new Array();
-        //                        pushQty[0] = qtyList[x];
-        //                        let newShopItem = new Object();
-        //                        newShopItem.item = shortList[x];
-        //                        newShopItem.qty = pushQty;
+        //                found = 1;
+        //                //                console.log("line 159", shortListLower, qtylistLower);
+        //                console.log(listCounter, " <--> ", shortList[x], " <--> ", qtyList[x]);
+        //                if ((shortList[x] != '') && (qtyList[x] != '')) {
+        //                    list.create({
+        //                        ingredient: shortList[x],
+        //                        qty: qtyList[x]
         //
-        //
-        //                        //pushes new item to shoppinglist
-        //                        shoppingList.push(newShopItem);
-        //                    }
-        //
+        //                    });
         //                }
-        //            } else
-        //            //if shopping list is enpty add new item.
-        //            {
-        //                let newItem = new shopListItem({
-        //                    item: shortlist[x],
-        //                    qty: qtylist[x]
-        //                })
-        //                shoppingList.push(newItem);
-        //
         //            }
+        //
+        //            listCounter++;
+        //        }
+
+        //        while ((found != 1) && (listCounter < shortList.length)) {
+
+        //with checking
+//        for (let listCounter = 0; listCounter < qtyList.length; listCounter++) {
+//            if (found < 1) {
+//                let qtylistLower = qtyList[x].toLowerCase();
+//                if (qtylistLower.indexOf(shortListLower) !== -1) {
+//
+//                    //                console.log("line 159", shortListLower, qtylistLower);
+//
+//                    //                    console.log("outside -->", listCounter, " <--> ", shortList[x], " <--> ", qtyList[x]);
+//                    if ((shortList[x] == '') && (qtyList[x] == '') && (shortList[x] == undefined) && (qtyList[x] == undefined)) {
+//                        console.log("inside if -->", listCounter);
+//                    } else {
+//                        console.log("inside else -->", listCounter, " <--> ", shortList[x], " <--> ", qtyList[x]);
+//                        list.create({
+//                            ingredient: shortList[x],
+//                            qty: qtyList[x]
+//
+//                        });
+//                        found = 1;
+//                    }
+//                }
+//            }
+
+            //without checking
+            for (let listCounter = 0; listCounter < qtyList.length; listCounter++) {
+                if (found < 1) {
+                    let qtylistLower = qtyList[x].toLowerCase();
+
+                        //                console.log("line 159", shortListLower, qtylistLower);
+
+                        //                    console.log("outside -->", listCounter, " <--> ", shortList[x], " <--> ", qtyList[x]);
+                        if ((shortList[x] == '') && (qtyList[x] == '') && (shortList[x] == undefined) && (qtyList[x] == undefined)) {
+                            console.log("inside if -->", listCounter);
+                        } else {
+                            console.log("inside else -->", listCounter, " <--> ", shortList[x], " <--> ", qtyList[x]);
+                            list.create({
+                                ingredient: shortList[x],
+                                qty: qtyList[x]
+
+                            });
+                            found = 1;
+                        }
+                }
+
+            //            listCounter++;
+        }
+
+
+
+        //        listCounter = 0;
+        found = 0;
+
     }
 }
 
@@ -276,6 +286,19 @@ app.get('/get-recipe/:id', (req, res) => {
     });
 
 });
+app.get('/retrieve-sList/', function (req, res) {
+    list.find(function (err, item) {
+        console.log(item);
+        if (err) {
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        }
+        console.log(item);
+        console.log(item);
+        res.status(200).json(item);
+    })
+})
 app.get('/retrieve-recipes/', function (req, res) {
     recipe.find(function (err, item) {
         //        console.log(item);

@@ -95,8 +95,24 @@ function sendRecepiesSearch(getSearchData, searchWeekDay) {
         });
 };
 
-function buildShoppingList() {
-    //accepts array of ingredients
+function buildShoppingList(result) {
+    let aggregateList = new Array();
+    for (let e = 0; e < result.length; e++) {
+        let resultLower = result[e].ingredient.toLowerCase();
+        for (let b = 0; b < aggregateList.length; b++) {
+            let aggregateLower = aggregateList[b].ingredient
+            if (resultLower === aggregateLower) {
+                aggregateList[b].ingredient.push(result[e].qty)
+            }
+
+        }
+
+    }
+//    else {
+    //        aggregateList.push(result[e]);
+    //    }
+    //console.log('aggregate', aggregateList);
+    //build output
 };
 
 function buildMenulist() {
@@ -157,14 +173,15 @@ $(document).on('click', '.selectButton', function (event) {
 
 $('#tempbutton').on('click', function (event) {
     event.preventDefault();
+    //console.log('button pushed');
     $.ajax({
             method: 'GET',
             dataType: 'json',
             contentType: 'application/json',
-            url: '/retrieve-recipes/',
+            url: '/retrieve-sList/',
         })
         .done(function (result) {
-            console.log(result);
+            buildShoppingList(result);
 
         })
         .fail(function (jqXHR, error, errorThrown) {
