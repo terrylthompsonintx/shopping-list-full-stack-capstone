@@ -95,22 +95,71 @@ function sendRecepiesSearch(getSearchData, searchWeekDay) {
         });
 };
 
+
+
 function buildShoppingList(result) {
-    let aggregateList = new Array();
+    console.log(result);
+    let aggregateList = [];
+    let aggregateLower = '';
+    let currentIngredient = '';
+    let oldIngredient = '';
+    let ingredientHtml = '';
     for (let e = 0; e < result.length; e++) {
-        let resultLower = result[e].ingredient.toLowerCase();
-        for (let b = 0; b < aggregateList.length; b++) {
-            let aggregateLower = aggregateList[b].ingredient
-            if (resultLower === aggregateLower) {
-                aggregateList[b].ingredient.push(result[e].qty)
+        if (result[e].ingredient !== undefined) {
+            var resultconvert = result[e].ingredient;
+            //console.log(resultconvert);
+            var resultLower = resultconvert.toLowerCase();
+            currentIngredient = resultLower;
+
+            if (currentIngredient !== oldIngredient) {
+                ingredientHtml += '<ul class = "col-3">';
+                ingredientHtml += '<li>' + result[e].ingredient;
+                ingredientHtml += '<ol>';
+                //                ingredientHtml += '<li> ' + result[e].qty;
+                //                ingredientHtml += '<form class="deleteDb">';
+                //                ingredientHtml += '<input type="hidden"value=' + result[e]._id + "'>";
+                //
+                //                ingredientHtml += '<button class ="deleteButton" type= "submit">';
+                //                ingredientHtml += '<i class="fa fa-trash" aria-hidden="true"></i> ';
+                //                ingredientHtml += '</button>  ';
+                //                ingredientHtml += '</form> ';
+                //                ingredientHtml += '</li> ';
+                //            } else {
+                //                //console.log(resultLower);
+                //                ingredientHtml += '<li> ' + result[e].qty;
+                //                ingredientHtml += '<form class="deleteDb">';
+                //                ingredientHtml += '<input type="hidden"value=' + result[e]._id + "'>";
+                //
+                //                ingredientHtml += '<button class ="deleteButton"type= "submit">';
+                //                ingredientHtml += '<i class="fa fa-trash" aria-hidden="true"></i> ';
+                //                ingredientHtml += '</button>  ';
+                //                ingredientHtml += '</form> ';
+                //                ingredientHtml += '</li> ';
+                //                // ingredientHtml += '<li>' + result[e].qty + '</li> <i class="fa fa-trash" aria-hidden="true"></i>';
             }
+            ingredientHtml += '<li> ' + result[e].qty;
+            ingredientHtml += '<form class="deleteDb">';
+            ingredientHtml += '<input type="hidden"value=' + result[e]._id + "'>";
+
+            ingredientHtml += '<button class ="deleteButton"type= "submit">';
+            ingredientHtml += '<i class="fa fa-trash" aria-hidden="true"></i> ';
+            ingredientHtml += '</button>  ';
+            ingredientHtml += '</form> ';
+            ingredientHtml += '</li> ';
+
+            //
+
+            console.log(currentIngredient, oldIngredient);
+            if (currentIngredient == oldIngredient) {
+                console.log('!', currentIngredient, oldIngredient);
+                ingredientHtml += '</ol></li></ul></form>';
+            }
+            oldIngredient = resultLower;
+            $('#list1').html(ingredientHtml);
+
 
         }
-
     }
-//    else {
-    //        aggregateList.push(result[e]);
-    //    }
     //console.log('aggregate', aggregateList);
     //build output
 };

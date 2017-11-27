@@ -175,48 +175,48 @@ function storeIngredient(shortList, qtyList) {
         //        while ((found != 1) && (listCounter < shortList.length)) {
 
         //with checking
-//        for (let listCounter = 0; listCounter < qtyList.length; listCounter++) {
-//            if (found < 1) {
-//                let qtylistLower = qtyList[x].toLowerCase();
-//                if (qtylistLower.indexOf(shortListLower) !== -1) {
-//
-//                    //                console.log("line 159", shortListLower, qtylistLower);
-//
-//                    //                    console.log("outside -->", listCounter, " <--> ", shortList[x], " <--> ", qtyList[x]);
-//                    if ((shortList[x] == '') && (qtyList[x] == '') && (shortList[x] == undefined) && (qtyList[x] == undefined)) {
-//                        console.log("inside if -->", listCounter);
-//                    } else {
-//                        console.log("inside else -->", listCounter, " <--> ", shortList[x], " <--> ", qtyList[x]);
-//                        list.create({
-//                            ingredient: shortList[x],
-//                            qty: qtyList[x]
-//
-//                        });
-//                        found = 1;
-//                    }
-//                }
-//            }
+        //        for (let listCounter = 0; listCounter < qtyList.length; listCounter++) {
+        //            if (found < 1) {
+        //                let qtylistLower = qtyList[x].toLowerCase();
+        //                if (qtylistLower.indexOf(shortListLower) !== -1) {
+        //
+        //                    //                console.log("line 159", shortListLower, qtylistLower);
+        //
+        //                    //                    console.log("outside -->", listCounter, " <--> ", shortList[x], " <--> ", qtyList[x]);
+        //                    if ((shortList[x] == '') && (qtyList[x] == '') && (shortList[x] == undefined) && (qtyList[x] == undefined)) {
+        //                        console.log("inside if -->", listCounter);
+        //                    } else {
+        //                        console.log("inside else -->", listCounter, " <--> ", shortList[x], " <--> ", qtyList[x]);
+        //                        list.create({
+        //                            ingredient: shortList[x],
+        //                            qty: qtyList[x]
+        //
+        //                        });
+        //                        found = 1;
+        //                    }
+        //                }
+        //            }
 
-            //without checking
-            for (let listCounter = 0; listCounter < qtyList.length; listCounter++) {
-                if (found < 1) {
-                    let qtylistLower = qtyList[x].toLowerCase();
+        //without checking
+        for (let listCounter = 0; listCounter < qtyList.length; listCounter++) {
+            if (found < 1) {
+                let qtylistLower = qtyList[x].toLowerCase();
 
-                        //                console.log("line 159", shortListLower, qtylistLower);
+                //                console.log("line 159", shortListLower, qtylistLower);
 
-                        //                    console.log("outside -->", listCounter, " <--> ", shortList[x], " <--> ", qtyList[x]);
-                        if ((shortList[x] == '') && (qtyList[x] == '') && (shortList[x] == undefined) && (qtyList[x] == undefined)) {
-                            console.log("inside if -->", listCounter);
-                        } else {
-                            console.log("inside else -->", listCounter, " <--> ", shortList[x], " <--> ", qtyList[x]);
-                            list.create({
-                                ingredient: shortList[x],
-                                qty: qtyList[x]
+                //                    console.log("outside -->", listCounter, " <--> ", shortList[x], " <--> ", qtyList[x]);
+                if ((shortList[x] == '') && (qtyList[x] == '') && (shortList[x] == undefined) && (qtyList[x] == undefined)) {
+                    console.log("inside if -->", listCounter);
+                } else {
+                    console.log("inside else -->", listCounter, " <--> ", shortList[x], " <--> ", qtyList[x]);
+                    list.create({
+                        ingredient: shortList[x],
+                        qty: qtyList[x]
 
-                            });
-                            found = 1;
-                        }
+                    });
+                    found = 1;
                 }
+            }
 
             //            listCounter++;
         }
@@ -287,7 +287,9 @@ app.get('/get-recipe/:id', (req, res) => {
 
 });
 app.get('/retrieve-sList/', function (req, res) {
-    list.find(function (err, item) {
+    list.find({}).sort({
+        ingredient: 1
+    }).exec(function (err, item) {
         console.log(item);
         if (err) {
             return res.status(500).json({
@@ -295,7 +297,7 @@ app.get('/retrieve-sList/', function (req, res) {
             });
         }
         console.log(item);
-        console.log(item);
+        //console.log(item);
         res.status(200).json(item);
     })
 })
@@ -386,6 +388,16 @@ app.post('/add-recipe-db/', function (req, res) {
     });
 
 
+});
+app.delete('/delete/:Id', function (req, res) {
+    list.findByIdAndRemove(req.params.id, function (err, items) {
+        if (err)
+            return res.status(404).json({
+                message: 'Item not found.'
+            });
+
+        res.status(201).json(items);
+    });
 });
 
 
