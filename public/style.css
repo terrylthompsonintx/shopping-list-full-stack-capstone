@@ -149,3 +149,7 @@ footer li {
     overflow-y: scroll;
     overflow-x: hidden;
 }
+
+.item {
+    min-height: 200px;
+}

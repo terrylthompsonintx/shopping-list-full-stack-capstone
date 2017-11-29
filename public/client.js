@@ -21,7 +21,7 @@ function buildRecipeList(dataOutput, searchWeekDay) {
     var buildHtml = '';
     $.each(dataOutput.matches,
         function (key, value) {
-            buildHtml += '<ul class="col-3">';
+            buildHtml += '<ul class="col-3 item">';
             buildHtml += '<li>';
             buildHtml += value.recipeName;
             buildHtml += ' <a href="https://www.yummly.com/#recipe/' + value.id + '" target="_blank" alt="Link to Yummly Recipe" title="Link to Yummly Recipe">';
@@ -95,8 +95,6 @@ function sendRecepiesSearch(getSearchData, searchWeekDay) {
         });
 };
 
-
-
 function buildShoppingList(result) {
     console.log(result);
     let aggregateList = [];
@@ -112,53 +110,98 @@ function buildShoppingList(result) {
             currentIngredient = resultLower;
 
             if (currentIngredient !== oldIngredient) {
-                ingredientHtml += '<ul class = "col-3">';
+                ingredientHtml += '<ul class = "col-3 item">';
                 ingredientHtml += '<li>' + result[e].ingredient;
-                ingredientHtml += '<ol>';
-                //                ingredientHtml += '<li> ' + result[e].qty;
-                //                ingredientHtml += '<form class="deleteDb">';
-                //                ingredientHtml += '<input type="hidden"value=' + result[e]._id + "'>";
-                //
-                //                ingredientHtml += '<button class ="deleteButton" type= "submit">';
-                //                ingredientHtml += '<i class="fa fa-trash" aria-hidden="true"></i> ';
-                //                ingredientHtml += '</button>  ';
-                //                ingredientHtml += '</form> ';
-                //                ingredientHtml += '</li> ';
-                //            } else {
-                //                //console.log(resultLower);
-                //                ingredientHtml += '<li> ' + result[e].qty;
-                //                ingredientHtml += '<form class="deleteDb">';
-                //                ingredientHtml += '<input type="hidden"value=' + result[e]._id + "'>";
-                //
-                //                ingredientHtml += '<button class ="deleteButton"type= "submit">';
-                //                ingredientHtml += '<i class="fa fa-trash" aria-hidden="true"></i> ';
-                //                ingredientHtml += '</button>  ';
-                //                ingredientHtml += '</form> ';
-                //                ingredientHtml += '</li> ';
-                //                // ingredientHtml += '<li>' + result[e].qty + '</li> <i class="fa fa-trash" aria-hidden="true"></i>';
+                ingredientHtml += '<ol class ="ingredientBox">';
+
             }
+
             ingredientHtml += '<li> ' + result[e].qty;
             ingredientHtml += '<form class="deleteDb">';
-            ingredientHtml += '<input type="hidden"value=' + result[e]._id + "'>";
+            ingredientHtml += '<input type="hidden" class = "deleteFromDB" value=' + result[e]._id + "'>";
 
             ingredientHtml += '<button class ="deleteButton"type= "submit">';
             ingredientHtml += '<i class="fa fa-trash" aria-hidden="true"></i> ';
             ingredientHtml += '</button>  ';
             ingredientHtml += '</form> ';
             ingredientHtml += '</li> ';
-
-            //
+            let a = e;
+            a++;
+            if (a < result.length) {
+                resultconvert = result[a].ingredient;
+                resultLower = resultconvert.toLowerCase();
+            }
 
             console.log(currentIngredient, oldIngredient);
-            if (currentIngredient == oldIngredient) {
+            if (currentIngredient !== resultLower) {
                 console.log('!', currentIngredient, oldIngredient);
-                ingredientHtml += '</ol></li></ul></form>';
+                //console.log('!', currentIngredient, oldIngredient);
+                ingredientHtml += '</ol></li></ul>';
+
             }
-            oldIngredient = resultLower;
-            $('#list1').html(ingredientHtml);
+            oldIngredient = currentIngredient;
+
+
 
 
         }
+        $('#list1').html(ingredientHtml);
+    }
+    //console.log('aggregate', aggregateList);
+    //build output
+};
+
+function buildFinalList(result) {
+    console.log(result);
+    let aggregateList = [];
+    let aggregateLower = '';
+    let currentIngredient = '';
+    let oldIngredient = '';
+    let ingredientHtml = '';
+    for (let e = 0; e < result.length; e++) {
+        if (result[e].ingredient !== undefined) {
+            var resultconvert = result[e].ingredient;
+            //console.log(resultconvert);
+            var resultLower = resultconvert.toLowerCase();
+            currentIngredient = resultLower;
+
+            if (currentIngredient !== oldIngredient) {
+                ingredientHtml += '<ul class = "col-3 item">';
+                ingredientHtml += '<li>' + result[e].ingredient;
+                ingredientHtml += '<ol class ="ingredientBox">';
+
+            }
+
+            ingredientHtml += '<li> ' + result[e].qty;
+            ingredientHtml += '<form class="deleteDb">';
+            ingredientHtml += '<input type="hidden" class = "crossOffLiar" value=' + result[e]._id + "'>";
+
+            ingredientHtml += '<button class ="deleteButton"type= "submit">';
+            ingredientHtml += '<i class="fa fa-shopping-cart" aria-hidden="true"></i> ';
+            ingredientHtml += '</button>  ';
+            ingredientHtml += '</form> ';
+            ingredientHtml += '</li> ';
+            let a = e;
+            a++;
+            if (a < result.length) {
+                resultconvert = result[a].ingredient;
+                resultLower = resultconvert.toLowerCase();
+            }
+
+            console.log(currentIngredient, oldIngredient);
+            if (currentIngredient !== resultLower) {
+                console.log('!', currentIngredient, oldIngredient);
+                //console.log('!', currentIngredient, oldIngredient);
+                ingredientHtml += '</ol></li></ul>';
+
+            }
+            oldIngredient = currentIngredient;
+
+
+
+
+        }
+        $('#finalList').html(ingredientHtml);
     }
     //console.log('aggregate', aggregateList);
     //build output
@@ -211,6 +254,33 @@ $(document).on('click', '.selectButton', function (event) {
         .done(function (result) {
 
             addToMenu(recipeObject.name, recipeObject.id);
+        })
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+        });
+});
+
+$(document).on('click', '.deleteButton', function (event) {
+    event.preventDefault();
+    // $(this).parent().toggleClass(hidden);
+
+    var idValue = $(this).parent().find('.deleteFromDB').val();
+
+
+
+    //console.log(recipeObject);
+    $.ajax({
+            method: 'DELETE',
+            dataType: 'json',
+            contentType: 'application/json',
+            //data: JSON.stringify(idValue),
+            url: '/delete/' + JSON.stringify(idValue),
+        })
+        .done(function (result) {
+
+            // addToMenu(recipeObject.name, recipeObject.id);
         })
         .fail(function (jqXHR, error, errorThrown) {
             console.log(jqXHR);

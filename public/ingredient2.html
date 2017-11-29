@@ -15,56 +15,8 @@
     <main id='ingredient2' class='col-12'>
         <h2>Shopping list</h2>
         <p>Push the In Basket button as you add items to your basket.</p>
-        <div class='col-12 boxed'>
-            <ul class='col-3'>
-                <li>
-                    Name: Beans
-                </li>
-                <li>Quamtities: 14oz can, 28 oz can</li>
-                <l><button class="button">In Basket</button></l>
-            </ul>
-            <ul class='col-3'>
-                <li>
-                    Name: Beans
-                </li>
-                <li>Quamtities: 14oz can, 28 oz can</li>
-                <l><button class="button">In Basket</button></l>
-            </ul>
-            <ul class='col-3'>
-                <li>
-                    Name: Beans
-                </li>
-                <li>Quamtities: 14oz can, 28 oz can</li>
-                <l><button class="button">In Basket</button></l>
-            </ul>
-            <ul class='col-3'>
-                <li>
-                    Name: Beans
-                </li>
-                <li>Quamtities: 14oz can, 28 oz can</li>
-                <l><button class="button">In Basket</button></l>
-            </ul>
-            <ul class='col-3'>
-                <li>
-                    Name: Beans
-                </li>
-                <li>Quamtities: 14oz can, 28 oz can</li>
-                <l><button class="button">In Basket</button></l>
-            </ul>
-            <ul class='col-3'>
-                <li>
-                    Name: Beans
-                </li>
-                <li>Quamtities: 14oz can, 28 oz can</li>
-                <l><button class="button">In Basket</button></l>
-            </ul>
-            <ul class='col-3'>
-                <li>
-                    Name: Beans
-                </li>
-                <li>Quamtities: 14oz can, 28 oz can</li>
-                <l><button class="button">In Basket</button></l>
-            </ul>
+        <div class='col-12 boxed' id='finalList'>
+
         </div>
         <div class='col-12'><a href="menulinks.html" class='button'>Done Shopping</a></div>
         <!--<div class='col-12'><button class="button">Done Shopping</button></div>
@@ -90,7 +42,28 @@
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>;
-    <script src="client.js"></script>
+    <script src="client.js"></script>;
+    <script>
+        $(document).ready(function() {
+
+            $.ajax({
+                    method: 'GET',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    url: '/retrieve-sList/',
+                })
+                .done(function(result) {
+                    buildFinalList(result);
+
+                })
+                .fail(function(jqXHR, error, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(error);
+                    console.log(errorThrown);
+                });
+        });
+
+    </script>
 </body>
 
 </html>
