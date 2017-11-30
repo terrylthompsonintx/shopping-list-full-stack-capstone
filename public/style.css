@@ -32,7 +32,8 @@ a:visited {
 /* mouse over link */
 
 a:hover {
-    font-weight: 120%;
+    background-color: aliceblue;
+    /*    font-weight: 120%;*/
 }
 
 
@@ -151,5 +152,13 @@ footer li {
 }
 
 .item {
-    min-height: 200px;
+    min-height: 300px;
+}
+
+.stroked {
+    text-decoration: line-through;
+}
+
+.item ul li:first-child {
+    font-size: 120%;
 }

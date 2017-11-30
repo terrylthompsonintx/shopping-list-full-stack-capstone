@@ -10,8 +10,9 @@ function addToMenu(recipeName, id, menu) {
     buildMenuHtml += '<li><a href="https://www.yummly.com/#recipe/' + id + '" target="_blank" alt="Link to Yummly Recipe" title="Link to Yummly Recipe">' + recipeName + ' </a></li>';
     var dayId = '#' + $('#recipeDay').val();
     $(dayId).append(buildMenuHtml);
-    menu += buildMenuHtml;
-    console.log(menu);
+    //    menu += '<li><h3>' + dayId + '</h3></li>';
+    //    menu += buildMenuHtml;
+    //    console.log(menu);
 
 };
 
@@ -29,14 +30,21 @@ function buildRecipeList(dataOutput, searchWeekDay) {
             buildHtml += '</a>';
             buildHtml += '</li>';
             buildHtml += '<li>';
+            let imgURL = JSON.stringify(value.imageUrlsBySize);
+            buildHtml += '<img src ="' + value.imageUrlsBySize +
+                '/>';
+            console.log(imgURL);
+            buildHtml += '</li>';
+
+            buildHtml += '<li>';
             buildHtml += 'Rating: ' + value.rating;
             buildHtml += '</li>';
             buildHtml += '<li>';
             buildHtml += 'Course: ' + value.attributes.course[0];
             buildHtml += '</li>';
-            buildHtml += '<li>';
-            buildHtml += value.id;
-            buildHtml += '</li>';
+            //            buildHtml += '<li>';
+            //            buildHtml += value.id;
+            //            buildHtml += '</li>';
             buildHtml += '<li>';
 
             buildHtml += '<ol class="ingredientBox">';
@@ -118,9 +126,9 @@ function buildShoppingList(result) {
 
             ingredientHtml += '<li> ' + result[e].qty;
             ingredientHtml += '<form class="deleteDb">';
-            ingredientHtml += '<input type="hidden" class = "deleteFromDB" value=' + result[e]._id + "'>";
+            ingredientHtml += '<input type="hidden" class = "deleteFromDB" value=' + result[e]._id + ">";
 
-            ingredientHtml += '<button class ="deleteButton"type= "submit">';
+            ingredientHtml += '<button class ="deleteButton button"type= "submit">';
             ingredientHtml += '<i class="fa fa-trash" aria-hidden="true"></i> ';
             ingredientHtml += '</button>  ';
             ingredientHtml += '</form> ';
@@ -134,7 +142,7 @@ function buildShoppingList(result) {
 
             console.log(currentIngredient, oldIngredient);
             if (currentIngredient !== resultLower) {
-                console.log('!', currentIngredient, oldIngredient);
+                //console.log('!', currentIngredient, oldIngredient);
                 //console.log('!', currentIngredient, oldIngredient);
                 ingredientHtml += '</ol></li></ul>';
 
@@ -174,9 +182,9 @@ function buildFinalList(result) {
 
             ingredientHtml += '<li> ' + result[e].qty;
             ingredientHtml += '<form class="deleteDb">';
-            ingredientHtml += '<input type="hidden" class = "crossOffLiar" value=' + result[e]._id + "'>";
+            ingredientHtml += '<input type="hidden" class = "strike" value=' + result[e]._id + ">";
 
-            ingredientHtml += '<button class ="deleteButton"type= "submit">';
+            ingredientHtml += '<button class ="crossOffList button" type="submit">';
             ingredientHtml += '<i class="fa fa-shopping-cart" aria-hidden="true"></i> ';
             ingredientHtml += '</button>  ';
             ingredientHtml += '</form> ';
@@ -208,7 +216,38 @@ function buildFinalList(result) {
 };
 
 function buildMenulist() {
-    //accepts array of links and builds links
+    $.ajax({
+            method: 'get',
+            dataType: 'json',
+            contentType: 'application/json',
+            //data: JSON.stringify(recipeObject),
+            url: '/retrieve-recipes/',
+        })
+        .done(function (result) {
+            console.log(result);
+            var menuHtml = '';
+            for (let t = 0; t < result.length; t++) {
+                var dayId = '#' + result[t].day;
+
+                menuHtml += '<li>';
+
+                menuHtml += '';
+                menuHtml += '<a href="https://www.yummly.com/#recipe/' + result[t].id + '" target="_blank" alt="Link to Yummly Recipe" title="Link to Yummly Recipe">';
+                menuHtml += result[t].name;
+                menuHtml += '</a>';
+                menuHtml += '</li>';
+                $(dayId).append(menuHtml);
+            }
+
+            //$('#menu').html(menuHtml);
+
+        })
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+        });
+
 };
 
 //STEP 2 - functions and objects usage
@@ -264,23 +303,23 @@ $(document).on('click', '.selectButton', function (event) {
 
 $(document).on('click', '.deleteButton', function (event) {
     event.preventDefault();
-    // $(this).parent().toggleClass(hidden);
+    $(this).closest('li').hide();
 
     var idValue = $(this).parent().find('.deleteFromDB').val();
 
+    //console.log(deleteObject);
 
-
-    //console.log(recipeObject);
+    console.log(idValue);
     $.ajax({
             method: 'DELETE',
             dataType: 'json',
             contentType: 'application/json',
-            //data: JSON.stringify(idValue),
-            url: '/delete/' + JSON.stringify(idValue),
+
+            url: '/delete/' + idValue,
         })
         .done(function (result) {
 
-            // addToMenu(recipeObject.name, recipeObject.id);
+
         })
         .fail(function (jqXHR, error, errorThrown) {
             console.log(jqXHR);
@@ -288,25 +327,9 @@ $(document).on('click', '.deleteButton', function (event) {
             console.log(errorThrown);
         });
 });
-
-
-$('#tempbutton').on('click', function (event) {
+$(document).on('click', '.crossOffList', function (event) {
     event.preventDefault();
-    //console.log('button pushed');
-    $.ajax({
-            method: 'GET',
-            dataType: 'json',
-            contentType: 'application/json',
-            url: '/retrieve-sList/',
-        })
-        .done(function (result) {
-            buildShoppingList(result);
+    $(this).closest('li').toggleClass('stroked');
 
-        })
-        .fail(function (jqXHR, error, errorThrown) {
-            console.log(jqXHR);
-            console.log(error);
-            console.log(errorThrown);
-        });
 
 });

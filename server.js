@@ -389,8 +389,9 @@ app.post('/add-recipe-db/', function (req, res) {
 
 
 });
-app.delete('/delete/:Id', function (req, res) {
-    list.findByIdAndRemove(req.params.id, function (err, items) {
+app.delete('/delete/:ingredientId', function (req, res) {
+    console.log(req.params.id);
+    list.findByIdAndRemove(req.params.ingredientId, function (err, items) {
         if (err)
             return res.status(404).json({
                 message: 'Item not found.'

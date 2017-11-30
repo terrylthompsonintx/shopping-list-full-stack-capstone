@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
     <link rel="stylesheet" href="rows.css" />
-    <link href="style.css" rel="stylesheet" type="text/css" />>
+    <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -14,55 +14,42 @@
     </header>
     <main id='menu' class='col-12'>
         <h2>Menu Links</h2>
-        <ul class='day'>
+        <ul id='sunday'>
             <li>
                 <h3>Sunday</h3>
-                <li><a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/">Chili</a></li>
-                <li><a href="http://allrecipes.com/recipe/16573/chicken-fried-chicken/">Fried Chicken</a></li>
+            </li>
+        </ul>
+        <ul id='monday'>
+            <li>
+                <h3>Monday</h3>
+            </li>
+        </ul>
+        <ul id='tuesday'>
+            <li>
+                <h3>Tuesday</h3>
+            </li>
+        </ul>
+        <ul id='wednesday'>
+            <li>
+                <h3>Wednesday</h3>
+            </li>
+        </ul>
+        <ul id='thursday'>
+            <li>
+                <h3>Thursday</h3>
+            </li>
+        </ul>
+        <ul id='friday'>
+            <li>
+                <h3>Friday</h3>
+            </li>
+        </ul>
+        <ul id='saturday'>
+            <li>
+                <h3>Saturday</h3>
+            </li>
+        </ul>
 
-
-
-                <li>
-                    <h3>Monday</h3 <ul>
-                    <li><a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/">Chili</a></li>
-                    <li><a href="http://allrecipes.com/recipe/16573/chicken-fried-chicken/">Fried Chicken</a></li>
-
-
-                </li>
-                <li>
-                    <h3>Tuesday</h3 <ul>
-                    <li><a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/">Chili</a></li>
-                    <li><a href="http://allrecipes.com/recipe/16573/chicken-fried-chicken/">Fried Chicken</a></li>
-
-
-                </li>
-                <li>
-                    <h3>Wednesday</h3 <ul>
-                    <li><a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/">Chili</a></li>
-                    <li><a href="http://allrecipes.com/recipe/16573/chicken-fried-chicken/">Fried Chicken</a></li>
-
-                </li>
-                <li>
-                    <h3>Thursday</h3 <ul>
-                    <li><a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/">Chili</a></li>
-                    <li><a href="http://allrecipes.com/recipe/16573/chicken-fried-chicken/">Fried Chicken</a></li>
-
-
-                </li>
-                <li>
-                    <h3>Friday</h3 <ul>
-                    <li><a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/">Chili</a></li>
-                    <li><a href="http://allrecipes.com/recipe/16573/chicken-fried-chicken/">Fried Chicken</a></li>
-
-
-                </li>
-                <li>
-                    <h3>Saturday</h3 <ul>
-                    <li><a href="http://http://allrecipes.com/recipe/16248/easy-homemade-chili/">Chili</a></li>
-                    <li><a href="http://allrecipes.com/recipe/16573/chicken-fried-chicken/">Fried Chicken</a></li>
-
-
-                </li>
 
 
         </ul>
@@ -90,6 +77,10 @@
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>;
     <script src="client.js"></script>
+    <script>
+        $(document).ready(buildMenulist);
+
+    </script>
 </body>
 
 </html>
