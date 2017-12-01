@@ -20,32 +20,38 @@ function buildRecipeList(dataOutput, searchWeekDay) {
 
     //console.log(dataOutput);
     var buildHtml = '';
+
     $.each(dataOutput.matches,
         function (key, value) {
             buildHtml += '<ul class="col-3 item">';
-            buildHtml += '<li>';
-            buildHtml += value.recipeName;
+            buildHtml += '<li class ="title">' + value.recipeName;
+
+            //            buildHtml += '<li>';
+            //            buildHtml += ;
             buildHtml += ' <a href="https://www.yummly.com/#recipe/' + value.id + '" target="_blank" alt="Link to Yummly Recipe" title="Link to Yummly Recipe">';
             buildHtml += '<i class="fa fa-info-circle" aria-hidden="true"></i>';
             buildHtml += '</a>';
             buildHtml += '</li>';
+
             buildHtml += '<li>';
-            let imgURL = JSON.stringify(value.imageUrlsBySize);
-            buildHtml += '<img src ="' + value.imageUrlsBySize +
-                '/>';
-            console.log(imgURL);
-            buildHtml += '</li>';
+            //nsole.log(value.smallImageUrls[0]);
+
+            buildHtml += '<img src ="' + value.smallImageUrls[0] +
+                '"/>';
+            //            console.log(imgURL);
+            //            buildHtml += '</li>';
 
             buildHtml += '<li>';
             buildHtml += 'Rating: ' + value.rating;
             buildHtml += '</li>';
             buildHtml += '<li>';
-            buildHtml += 'Course: ' + value.attributes.course[0];
+            buildHtml += 'Course: ' + value.attributes.course;
             buildHtml += '</li>';
-            //            buildHtml += '<li>';
-            //            buildHtml += value.id;
-            //            buildHtml += '</li>';
+            buildHtml += '<li class="title">';
+            buildHtml += 'Ingredients:';
+            buildHtml += '</li>';
             buildHtml += '<li>';
+
 
             buildHtml += '<ol class="ingredientBox">';
             let shortList = "";

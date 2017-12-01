@@ -152,13 +152,15 @@ footer li {
 }
 
 .item {
-    min-height: 300px;
+    min-height: 320px;
 }
 
 .stroked {
     text-decoration: line-through;
 }
 
-.item ul li:first-child {
-    font-size: 120%;
+.item,
+ul,
+.title {
+    font-size: 110%;
 }
