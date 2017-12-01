@@ -253,18 +253,7 @@ app.get('/search-recipes/:name', (req, res) => {
 
 });
 
-//????
-//let recipe_details = {
-//    "name": "Baked Panko Crusted Fish",
-//    "rating": "4",
-//    "course": "Main Dishes",
-//    "id": "Baked-Panko-Crusted-Fish-2040665",
-//    "day": "sunday",
-//    "ingredients": {
-//        "fish fillets": "1 to 1 1/2 pounds fish fillets, such as haddock, cod, catfish, pollock, or similar mild white fish, cut into 4-ounce to 6-ounce portions",
-//        "salt": "salt and freshly ground black pepper"
-//    }
-//}
+
 app.get('/get-recipe/:id', (req, res) => {
 
     //console.log(req.params.id);
@@ -313,25 +302,7 @@ app.get('/retrieve-recipes/', function (req, res) {
     });
 });
 
-//app.get('/retrieve-recipes/', (req, res) => {
-//    var allrecipes = '';
-//    allrecipes = recipe.find();
-//    console.log(allrecipes);
-//    res.json(allrecipes);
-//
-//
-//});
-//app.get('/populate-favorites', function (req, res) {
-//    activity.find(function (err, item) {
-//        console.log(item);
-//        if (err) {
-//            return res.status(500).json({
-//                message: 'Internal Server Error'
-//            });
-//        }
-//        res.status(200).json(item);
-//    });
-// });
+
 app.post('/add-recipe-db/', function (req, res) {
 
 
@@ -400,7 +371,37 @@ app.delete('/delete/:ingredientId', function (req, res) {
         res.status(201).json(items);
     });
 });
+app.delete('/deleterec/:id', function (req, res) {
+    console.log(req.params.id);
+    if (req.params.id = 'killAll') {
 
+        list.remove({}, function (err, items) {
+            if (err)
+                return res.status(404).json({
+                    message: 'Item not found.'
+                });
+
+            res.status(201).json(items);
+        });
+
+
+    };
+});
+
+app.delete('/deletering/:id', function (req, res) {
+    console.log(req.params.id);
+    if (req.params.id = 'killAll') {
+
+        recipe.remove({}, function (err, items) {
+            if (err)
+                return res.status(404).json({
+                    message: 'Item not found.'
+                });
+
+            res.status(201).json(items);
+        });
+    };
+});
 
 
 

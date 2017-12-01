@@ -32,8 +32,15 @@ a:visited {
 /* mouse over link */
 
 a:hover {
-    background-color: aliceblue;
-    /*    font-weight: 120%;*/
+    color: #986305;
+}
+
+li img {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    border: 1px solid;
+    border-radius: 5px;
 }
 
 
@@ -64,7 +71,8 @@ ol {
     list-style-position: inside;
 }
 
-footer img {
+footer li img {
+    width: auto;
     max-height: 30px;
 }
 
@@ -92,9 +100,12 @@ footer img {
     list-style-type: integer;
 }
 
+
+/*
 a:hover {
     font-size: 130%;
 }
+*/
 
 .button,
 .selectButton {
@@ -152,15 +163,32 @@ footer li {
 }
 
 .item {
-    min-height: 320px;
+    min-height: 330px;
 }
 
 .stroked {
     text-decoration: line-through;
 }
 
-.item,
-ul,
+.itemIng {
+    min-height: 150px;
+}
+
+.hidden {
+    display: none;
+}
+
+footer,
+p {
+    margin-top: 10px;
+}
+
 .title {
     font-size: 110%;
+    min-height: 49px;
+}
+
+.title ol li {
+    border-bottom: none;
+    font-size: 70%;
 }

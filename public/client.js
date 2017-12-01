@@ -1,6 +1,7 @@
 //STEP 1 - functions and objects definitions
 
 var menu = '';
+var toggleHidden = 1;
 
 
 //Populates Menu section of Search.html
@@ -23,18 +24,16 @@ function buildRecipeList(dataOutput, searchWeekDay) {
 
     $.each(dataOutput.matches,
         function (key, value) {
-            buildHtml += '<ul class="col-3 item">';
+            buildHtml += '<ul class="col-4 item">';
             buildHtml += '<li class ="title">' + value.recipeName;
 
-            //            buildHtml += '<li>';
-            //            buildHtml += ;
-            buildHtml += ' <a href="https://www.yummly.com/#recipe/' + value.id + '" target="_blank" alt="Link to Yummly Recipe" title="Link to Yummly Recipe">';
+            buildHtml += ' <a href="https://www.yummly.com/#recipe/ class="wobble"' + value.id + '" target="_blank" alt="Link to Yummly Recipe" title="Link to Yummly Recipe">';
             buildHtml += '<i class="fa fa-info-circle" aria-hidden="true"></i>';
             buildHtml += '</a>';
             buildHtml += '</li>';
 
             buildHtml += '<li>';
-            //nsole.log(value.smallImageUrls[0]);
+
 
             buildHtml += '<img src ="' + value.smallImageUrls[0] +
                 '"/>';
@@ -124,8 +123,8 @@ function buildShoppingList(result) {
             currentIngredient = resultLower;
 
             if (currentIngredient !== oldIngredient) {
-                ingredientHtml += '<ul class = "col-3 item">';
-                ingredientHtml += '<li>' + result[e].ingredient;
+                ingredientHtml += '<ul class = "col-3 itemIng">';
+                ingredientHtml += '<li class="title">' + result[e].ingredient + '<hr>';
                 ingredientHtml += '<ol class ="ingredientBox">';
 
             }
@@ -180,8 +179,8 @@ function buildFinalList(result) {
             currentIngredient = resultLower;
 
             if (currentIngredient !== oldIngredient) {
-                ingredientHtml += '<ul class = "col-3 item">';
-                ingredientHtml += '<li>' + result[e].ingredient;
+                ingredientHtml += '<ul class = "col-3 itemIng">';
+                ingredientHtml += '<li class ="title">' + result[e].ingredient + '<hr>';
                 ingredientHtml += '<ol class ="ingredientBox">';
 
             }
@@ -264,8 +263,14 @@ function buildMenulist() {
 $('#searchIcon').on('click', function () {
     let searchString = $('#searchTerm').val();
     let searchWeekDay = $('#recipeDay').val();
-    console.log(searchString);
+    //console.log(searchString);
     sendRecepiesSearch(searchString, searchWeekDay);
+
+    if (toggleHidden) {
+        toggleHidden = 0;
+        $('#searchBoxReturn').toggleClass("hidden");
+        $('#yLogo').toggleClass("hidden");
+    }
 });
 
 //Event handler for select button on recipes
@@ -276,7 +281,8 @@ $(document).on('click', '.selectButton', function (event) {
     var recipeRatingValue = $(this).parent().find('.storeToDbRating').val();
     var recipeCourseValue = $(this).parent().find('.storeToDbCourse').val();
     var recipeIdValue = $(this).parent().find('.storeToDbId').val();
-    var recipeDayValue = $(this).parent().find('.storeToDay').val();
+    //var recipeDayValue = $(this).parent().find('.storeToDay').val();
+    var recipeDayValue = $('#recipeDay').val();
     var recipeStoreToShortList = $(this).parent().find('.storeToShortList').val();
 
     var recipeObject = {
@@ -337,5 +343,50 @@ $(document).on('click', '.crossOffList', function (event) {
     event.preventDefault();
     $(this).closest('li').toggleClass('stroked');
 
+
+});
+$(document).on('click', '#dumpDb', function (event) {
+    event.preventDefault();
+
+
+    let killObj = {
+        id: 'killAll'
+    }
+
+    $.ajax({
+            method: 'DELETE',
+            dataType: 'json',
+            contentType: 'application/json',
+
+            url: '/deleterec/' + JSON.stringify(killObj),
+        })
+        .done(function (result) {
+
+
+        })
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+
+        });
+    $.ajax({
+            method: 'DELETE',
+            dataType: 'json',
+            contentType: 'application/json',
+
+            url: '/deletering/' + JSON.stringify(killObj),
+        })
+        .done(function (result) {
+
+
+        })
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+
+        });
+    window.location = "/";
 
 });

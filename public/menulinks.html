@@ -6,6 +6,7 @@
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
     <link rel="stylesheet" href="rows.css" />
     <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="hover.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -54,14 +55,18 @@
 
         </ul>
 
+        <div class='col-12'><button class='button' id='dumpDb' type='submit'>Done Cooking</button>
+
+        </div>
 
     </main>
 
 
 
     <footer>
+        <p>&copy;Terry Thompson</p>
         <ul>
-            <li>&copy;Terry Thompson</li>
+
             <li>
                 <a href="https://github.com/terrylthompsonintx"><img src="images/mark-github.png" alt="Git Hub Logo"></a>
             </li>
@@ -72,13 +77,12 @@
                 <a href='https://www.linkedin.com/in/terrylthompson/'><img src="images/th.jpg" alt="linked in  Logo"></a>
             </li>
         </ul>
-
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>;
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="client.js"></script>
     <script>
-        $(document).ready(buildMenulist);
+        $(document).ready(buildMenulist)
 
     </script>
 </body>
