@@ -1,6 +1,3 @@
-//book mark ????
-
-//getting external resources
 const express = require('express');
 const morgan = require('morgan');
 var unirest = require('unirest');
@@ -48,11 +45,6 @@ if (require.main === module) {
 };
 
 // external api function
-/*const yummlyKey = '971c769d4bab882dc3281f0dc6131324';
-const appId = '35372e2c';
-const yummlyEndPoint = 'http://api.yummly.com/v1';
-const yummlyRecipe = 'http://api.yummly.com/v1/api/recipes?'
-var searchTermYummly = '';*/
 
 var getRecepiesFromYum = function (searchTerm) {
     var emitter = new events.EventEmitter();
