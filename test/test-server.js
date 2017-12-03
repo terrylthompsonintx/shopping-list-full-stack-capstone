@@ -19,77 +19,101 @@ var app = server.app;
 
 chai.use(chaiHttp);
 
-describe('shopping-list-full-stack-capstone', function() {
-    before(function(done) {
-        server.runServer(function() {
+describe('shopping-list-full-stack-capstone', function () {
+    before(function (done) {
+        server.runServer(function () {
             Activity.create({
                 name: 'Fun Run'
             }, {
                 name: 'Run Event'
             }, {
                 name: 'Color Run'
-            }, function() {
+            }, function () {
                 done();
             });
         });
     });
 
-    describe('shopping-list-full-stack-capstone', function() {
+    describe('shopping-list-full-stack-capstone', function () {
 
-        it('should list recipes on GET', function(done) {
+        it('should list recipes on GET', function (done) {
             chai.request(app)
-                .get('/activity/running')
-                .end(function(err, res) {
-                should.equal(err, null);
-                res.should.have.status(200);
-                res.should.be.json;
-                // res.body.should.be.a('array');
-                // res.body.should.have.length(3);
-                // res.body[0].should.be.a('object');
-                // res.body[0].should.have.property('_id');
-                // res.body[0].should.have.property('name');
-                // res.body[0]._id.should.be.a('string');
-                // res.body[0].name.should.be.a('string');
-                // res.body[0].name.should.equal('Fun Run');
-                // res.body[1].name.should.equal('Run Event');
-                // res.body[2].name.should.equal('Color Run');
-                done();
-            });
+                .get('/get-recipe/')
+                .end(function (err, res) {
+                    should.equal(err, null);
+                    res.should.have.status(200);
+                    res.should.be.json;
+                    // res.body.should.be.a('array');
+                    // res.body.should.have.length(3);
+                    // res.body[0].should.be.a('object');
+                    // res.body[0].should.have.property('_id');
+                    // res.body[0].should.have.property('name');
+                    // res.body[0]._id.should.be.a('string');
+                    // res.body[0].name.should.be.a('string');
+                    // res.body[0].name.should.equal('Fun Run');
+                    // res.body[1].name.should.equal('Run Event');
+                    // res.body[2].name.should.equal('Color Run');
+                    done();
+                });
         });
-        it('should add an activity on POST', function(done) {
+
+        it('should list ingredients on GET', function (done) {
             chai.request(app)
-                .post('/add-to-favorites')
+                .get('/retrieve-sList/')
+                .end(function (err, res) {
+                    should.equal(err, null);
+                    res.should.have.status(200);
+                    res.should.be.json;
+                    // res.body.should.be.a('array');
+                    // res.body.should.have.length(3);
+                    // res.body[0].should.be.a('object');
+                    // res.body[0].should.have.property('_id');
+                    // res.body[0].should.have.property('name');
+                    // res.body[0]._id.should.be.a('string');
+                    // res.body[0].name.should.be.a('string');
+                    // res.body[0].name.should.equal('Fun Run');
+                    // res.body[1].name.should.equal('Run Event');
+                    // res.body[2].name.should.equal('Color Run');
+                    done();
+                });
+        });
+        it('should add a recipe  on POST', function (done) {
+            chai.request(app)
+                .post('/add-recipe-db/')
                 .send({
-                'name': 'Jogger'
-            })
-                .end(function(err, res) {
-                should.equal(err, null);
-                res.should.have.status(201);
-                res.should.be.json;
-                res.body.should.be.a('object');
-                res.body.should.have.property('name');
-                res.body.should.have.property('_id');
-                res.body.name.should.be.a('string');
-                res.body._id.should.be.a('string');
-                res.body.name.should.equal('Jogger');
-                done();
-            });
+                    'id': 'test',
+                })
+                .end(function (err, res) {
+                    should.equal(err, null);
+                    res.should.have.status(201);
+                    res.should.be.json;
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('name');
+                    res.body.should.have.property('_id');
+                    res.body.name.should.be.a('string');
+                    res.body._id.should.be.a('string');
+                    res.body.name.should.equal('Jogger');
+                    done();
+                });
         });
 
-        it('should delete an item on DELETE', function(done) {
+        it('should delete an recipes on DELETE', function (done) {
             chai.request(app)
-                .delete('/')
-                .end(function(err, res) {
-                res.should.have.status(404);
-                done();
-            });
+                .delete('/deleterec/:id')
+                .send({
+                    'id': 'killAll',
+                })
+                .end(function (err, res) {
+                    res.should.have.status(404);
+                    done();
+                });
         });
 
     });
 
 
-    after(function(done) {
-        Activity.remove(function() {
+    after(function (done) {
+        Activity.remove(function () {
             done();
         });
     });

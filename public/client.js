@@ -1,11 +1,12 @@
 //STEP 1 - functions and objects definitions
-
+//global variables
 var menu = '';
 var toggleHidden = 1;
 
+//Functions
 
-//Populates Menu section of Search.html
 function addToMenu(recipeName, id, menu) {
+    //Populates Menu section of Search.html
     var buildMenuHtml = '';
     //buildMenuHtml += '<li><h3>' + $('#recipeDay').val() + '</h3></li>';
     buildMenuHtml += '<li><a href="https://www.yummly.com/#recipe/' + id + '" target="_blank" alt="Link to Yummly Recipe" title="Link to Yummly Recipe">' + recipeName + ' </a></li>';
@@ -18,7 +19,7 @@ function addToMenu(recipeName, id, menu) {
 };
 
 function buildRecipeList(dataOutput, searchWeekDay) {
-
+    //builds recipe html for user selection
     //console.log(dataOutput);
     var buildHtml = '';
 
@@ -27,7 +28,7 @@ function buildRecipeList(dataOutput, searchWeekDay) {
             buildHtml += '<ul class="col-4 item">';
             buildHtml += '<li class ="title">' + value.recipeName;
 
-            buildHtml += ' <a href="https://www.yummly.com/#recipe/ class="wobble"' + value.id + '" target="_blank" alt="Link to Yummly Recipe" title="Link to Yummly Recipe">';
+            buildHtml += ' <a href="https://www.yummly.com/#recipe/ ' + value.id + '" target="_blank" alt="Link to Yummly Recipe" title="Link to Yummly Recipe">';
             buildHtml += '<i class="fa fa-info-circle" aria-hidden="true"></i>';
             buildHtml += '</a>';
             buildHtml += '</li>';
@@ -109,6 +110,7 @@ function sendRecepiesSearch(getSearchData, searchWeekDay) {
 };
 
 function buildShoppingList(result) {
+    //builds ingredient list for ingredients page
     console.log(result);
     let aggregateList = [];
     let aggregateLower = '';
@@ -165,6 +167,7 @@ function buildShoppingList(result) {
 };
 
 function buildFinalList(result) {
+    //creates shopping list
     console.log(result);
     let aggregateList = [];
     let aggregateLower = '';
@@ -221,6 +224,7 @@ function buildFinalList(result) {
 };
 
 function buildMenulist() {
+    //Gets Menu links for Menu page
     $.ajax({
             method: 'get',
             dataType: 'json',
@@ -242,6 +246,7 @@ function buildMenulist() {
                 menuHtml += '</a>';
                 menuHtml += '</li>';
                 $(dayId).append(menuHtml);
+                var menuHtml = '';
             }
 
             //$('#menu').html(menuHtml);
@@ -255,26 +260,24 @@ function buildMenulist() {
 
 };
 
-//STEP 2 - functions and objects usage
+//Event Handlers
 
-
-
-//Event handler for search button
 $('#searchIcon').on('click', function () {
+    //gets user search term
     let searchString = $('#searchTerm').val();
     let searchWeekDay = $('#recipeDay').val();
     //console.log(searchString);
     sendRecepiesSearch(searchString, searchWeekDay);
 
     if (toggleHidden) {
+        //hides the Yummly logo and displays the search display.
         toggleHidden = 0;
         $('#searchBoxReturn').toggleClass("hidden");
         $('#yLogo').toggleClass("hidden");
     }
 });
-
-//Event handler for select button on recipes
 $(document).on('click', '.selectButton', function (event) {
+    //Stores a recipe and the day selected to Mongo.
     event.preventDefault();
 
     var recipeNameValue = $(this).parent().find('.storeToDbName').val();
@@ -312,8 +315,8 @@ $(document).on('click', '.selectButton', function (event) {
             console.log(errorThrown);
         });
 });
-
 $(document).on('click', '.deleteButton', function (event) {
+    //Deletes an ingredient from Mongo
     event.preventDefault();
     $(this).closest('li').hide();
 
@@ -346,6 +349,8 @@ $(document).on('click', '.crossOffList', function (event) {
 
 });
 $(document).on('click', '#dumpDb', function (event) {
+    //Kills all mongo data in preparation for next cycle of program.
+
     event.preventDefault();
 
 
