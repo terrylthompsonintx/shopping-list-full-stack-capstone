@@ -1,5 +1,5 @@
-const chai = require('chai');
-const chaiHttp = require('chai-http');
+//const chai = require('chai');
+//const chaiHttp = require('chai-http');
 
 const {
     app,
@@ -15,7 +15,7 @@ var chaiHttp = require('chai-http');
 var recipe = require('../models/recipe.js');
 var list = require('../models/list.js');
 var should = chai.should();
-var app = server.app;
+//var app = server.app;
 
 chai.use(chaiHttp);
 

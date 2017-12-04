@@ -49,7 +49,7 @@ if (require.main === module) {
 var getRecepiesFromYum = function (searchTerm) {
     var emitter = new events.EventEmitter();
     //console.log("inside getFromActive function");
-    unirest.get("http://api.yummly.com/v1/api/recipes?_app_id=35372e2c&_app_key=971c769d4bab882dc3281f0dc6131324&q=" + searchTerm)
+    unirest.get("http://api.yummly.com/v1/api/recipes?_app_id=35372e2c&_app_key=971c769d4bab882dc3281f0dc6131324&q=" + searchTerm + '&maxResult=12')
         .header("Accept", "application/json")
         .end(function (result) {
             // console.log(result.status, result.headers, result.body);

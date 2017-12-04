@@ -192,3 +192,37 @@ p {
     border-bottom: none;
     font-size: 70%;
 }
+
+#intro ul {
+    list-style: none;
+    display: block;
+    margin: 1rem auto;
+    width: 80%;
+    text-align: center;
+}
+
+#intro li {
+    padding: 1rem;
+    width: 22%;
+    display: inline-block;
+    vertical-align: top;
+    border-right: 1px solid grey;
+}
+
+#intro li:last-child {
+    border-right: none;
+}
+
+#intro li div i {
+    font-size: 400%;
+    color: #864E03;
+}
+
+@media only screen and (max-width:640px) {
+    #intro li {
+        padding: 1rem;
+        width: 100%;
+        display: block;
+        border-right: none;
+    }
+}
