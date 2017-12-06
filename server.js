@@ -143,53 +143,12 @@ function storeIngredient(shortList, qtyList) {
 
     console.log(shortList, qtyList);
     for (let x = 0; x < qtyList.length; x++) {
-        let shortListLower = shortList[x].toLowerCase();
+        if (shortList[x] !== undefined) {
+            let shortListLower = shortList[x].toLowerCase();
+        }
         //        let listCounter = 0;
         let found = 0;
-        //        while ((found != 1) && (listCounter < shortList.length)) {
-        //            let qtylistLower = qtyList[x].toLowerCase();
-        //            if (qtylistLower.indexOf(shortListLower) !== -1) {
-        //                found = 1;
-        //                //                console.log("line 159", shortListLower, qtylistLower);
-        //                console.log(listCounter, " <--> ", shortList[x], " <--> ", qtyList[x]);
-        //                if ((shortList[x] != '') && (qtyList[x] != '')) {
-        //                    list.create({
-        //                        ingredient: shortList[x],
-        //                        qty: qtyList[x]
-        //
-        //                    });
-        //                }
-        //            }
-        //
-        //            listCounter++;
-        //        }
 
-        //        while ((found != 1) && (listCounter < shortList.length)) {
-
-        //with checking
-        //        for (let listCounter = 0; listCounter < qtyList.length; listCounter++) {
-        //            if (found < 1) {
-        //                let qtylistLower = qtyList[x].toLowerCase();
-        //                if (qtylistLower.indexOf(shortListLower) !== -1) {
-        //
-        //                    //                console.log("line 159", shortListLower, qtylistLower);
-        //
-        //                    //                    console.log("outside -->", listCounter, " <--> ", shortList[x], " <--> ", qtyList[x]);
-        //                    if ((shortList[x] == '') && (qtyList[x] == '') && (shortList[x] == undefined) && (qtyList[x] == undefined)) {
-        //                        console.log("inside if -->", listCounter);
-        //                    } else {
-        //                        console.log("inside else -->", listCounter, " <--> ", shortList[x], " <--> ", qtyList[x]);
-        //                        list.create({
-        //                            ingredient: shortList[x],
-        //                            qty: qtyList[x]
-        //
-        //                        });
-        //                        found = 1;
-        //                    }
-        //                }
-        //            }
-
-        //without checking
         for (let listCounter = 0; listCounter < qtyList.length; listCounter++) {
             if (found < 1) {
                 let qtylistLower = qtyList[x].toLowerCase();
@@ -299,14 +258,14 @@ app.post('/add-recipe-db/', function (req, res) {
 
 
     let aRecipe = getSingleFromYum(req.body.id);
-    //console.log(aRecipe);
+    console.log(aRecipe);
 
     //get the data from the first api call
     aRecipe.on('end', function (item) {
         //        console.log(req.body.shortList.split(","));
         //        console.log(item.ingredientLines);
 
-        //storeShoppingList(req.body.shortList.split(","), item.ingredientLines);
+
         storeIngredient(req.body.shortList.split(","), item.ingredientLines);
         //ttstoreShoppingList(req.body.shortList.split(","), item.ingredientLines);
         //console.log(item.ingredientLines);
@@ -353,7 +312,7 @@ app.post('/add-recipe-db/', function (req, res) {
 
 });
 app.delete('/delete/:ingredientId', function (req, res) {
-    console.log(req.params.id);
+    //console.log(req.params.id);
     list.findByIdAndRemove(req.params.ingredientId, function (err, items) {
         if (err)
             return res.status(404).json({
@@ -397,6 +356,7 @@ app.delete('/deletering/:id', function (req, res) {
 
 
 
-//export and run the server
-
+//export and run
+exports.app = app;
+exports.runServer = runServer;
 //app.listen(process.env.PORT || 8080);
